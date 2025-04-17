@@ -1,0 +1,5 @@
+:root {
+  --main-blue: #0122A1;
+  --main-purple: #692AFF;
+  --main-gradient: linear-gradient(90deg, #0122A1 2%, #692AFF 100%);
+}

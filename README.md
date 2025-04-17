@@ -1,134 +1,54 @@
-# DashFlow - Plataforma de Gestión Financiera
+# React + TypeScript + Vite
 
-## Descripción del Proyecto
-DashFlow es una herramienta de gestión financiera accesible para todos los públicos que permite monitorear la evolución de finanzas personales y facilita el aprendizaje de conceptos financieros complejos.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Estructura del Proyecto
+Currently, two official plugins are available:
 
-### Módulo 1: Finanzas Personales (MVP)
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-#### Pantalla 1: Home
-- Dashboard sintetizado
-- Cards con información destacada de cada sección
+## Expanding the ESLint configuration
 
-#### Pantalla 2: Operaciones
-- Listado de transacciones de todas las entidades registradas
-- Filtros por entidad, fecha y categoría
-- Cards desplegables con información detallada
-- Capacidad de modificar categorización
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-#### Pantalla 3: Estadísticas
-- Gráfico circular de gastos por categoría del último mes
-- Indicadores de límites de gasto, gasto actual y disponible
-- Gráfico de barras apiladas mensual por categorías
-- Visualización interactiva de datos mensuales
+```js
+export default tseslint.config({
+  extends: [
+    // Remove ...tseslint.configs.recommended and replace with this
+    ...tseslint.configs.recommendedTypeChecked,
+    // Alternatively, use this for stricter rules
+    ...tseslint.configs.strictTypeChecked,
+    // Optionally, add this for stylistic rules
+    ...tseslint.configs.stylisticTypeChecked,
+  ],
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
+```
 
-#### Pantalla 4: Presupuestos
-- Configuración de objetivos de ahorro
-- Establecimiento de límites de gasto mensuales
-- Opciones de presupuesto general o por categorías
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-### Módulo 2: Mercado Financiero (Nice to Have)
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-#### Pantalla 1: Estado de Cartera
-- Creación y gestión de carteras de inversión
-- Análisis de rendimiento en tres niveles:
-  - Por activo
-  - Por cartera
-  - Por portfolio completo
-
-#### Pantalla 2: Mercado Financiero
-- Dashboards personalizables por tipo de activo
-- Monitorización de diferentes instrumentos financieros
-- Acceso a plataformas de compraventa
-
-#### Pantalla 3: Noticias Financieras
-- Formato tipo blog
-- Actualización del sector financiero
-
-#### Pantalla 4: WikiFinance
-- Recursos educativos
-- Conceptos básicos de finanzas
-
-## Características del Servicio
-
-### Puntos Clave
-1. Facilidad de uso
-   - Interfaces simplificadas
-   - Visualización sintética de información
-   - Lenguaje accesible
-
-2. Claridad en la oferta
-   - Separación clara entre módulos de ahorro e inversión
-   - Estructura intuitiva
-
-3. Integración de servicios
-   - Centralización de funcionalidades
-   - Nexo entre diferentes servicios financieros
-
-## Objetivos
-
-### Principales
-- Democratizar el acceso a inversiones
-- Proporcionar información del mercado financiero
-- Educar sobre conceptos financieros básicos
-- Facilitar el ahorro
-- Estructurar gastos
-- Sintetizar información bancaria
-- Simplificar la interfaz de usuario
-
-### Beneficios para Usuarios
-- Gestión simplificada de finanzas diarias
-- Introducción al mundo financiero
-- Monitoreo sencillo de inversiones
-
-## Estrategia de Implementación
-- Diseño de UX intuitiva y atractiva
-- Integración de APIs financieras (Binance, Investing.com)
-- Visualización de datos en tiempo real
-
-## Análisis de Competencia
-
-### Tipos de Competidores
-1. Aplicaciones Bancarias
-   - Enfoque en gestión financiera personal
-
-2. Aplicaciones de Inversión
-   - Especialización en seguimiento de activos
-   - Gestión de carteras
-
-## Requirements y User Stories
-- Registro y visualización de transacciones
-- Dashboard inicial comprehensivo
-- Filtros de transacciones
-- Modificación de categorías
-- Estadísticas interactivas
-- Gestión de límites de gasto
-- Sistema de alertas
-- Seguimiento de inversiones
-- Dashboards personalizados
-- Integración de APIs externas
-- Sección de noticias
-- Contenido educativo
-- Diseño intuitivo
-- Optimización móvil
-
-## Assumptions & Hypotheses
-
-### Assumptions
-- Preferencia por interfaces simples
-- Demanda de educación financiera
-- Necesidad de centralización de herramientas
-- Valor de información en tiempo real
-- Importancia de categorización automática
-- Necesidad de gestión presupuestaria
-- Impacto positivo de la gamificación
-
-### Hipótesis
-- La interfaz clara aumentará la preferencia de usuarios
-- La integración de APIs generará confianza
-- La simplificación de procesos aumentará el uso recurrente
-- El contenido educativo fomentará la inversión
-- El servicio integral atraerá diversos perfiles
-- La personalización mejorará el control financiero
-- La diferenciación de módulos aumentará la usabilidad
+export default tseslint.config({
+  plugins: {
+    // Add the react-x and react-dom plugins
+    'react-x': reactX,
+    'react-dom': reactDom,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended typescript rules
+    ...reactX.configs['recommended-typescript'].rules,
+    ...reactDom.configs.recommended.rules,
+  },
+})
+```
