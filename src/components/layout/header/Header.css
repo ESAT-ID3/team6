@@ -1,0 +1,14 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    background: var(--main-gradient);
+    color: var(--white);
+    padding: 20px 18px 20px 18px;
+}
+
+.header-contents {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

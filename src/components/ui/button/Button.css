@@ -1,0 +1,33 @@
+.btn {
+    padding: 12px 48px;
+    border-radius: 20px;
+    font-family: var(--font-main);
+    border: none;
+}
+
+.btn:disabled {
+    opacity: 0.5
+}
+
+.btn--primary {
+    background: var(--main-gradient);
+    color: var(--white);
+}
+
+.btn--primary:not(:disabled):hover {
+    background: var(--white);
+    outline: 1px solid var(--main-blue);
+    color: var(--main-blue);
+}
+
+.btn--secondary {
+    background: var(--white);
+    outline: 1px solid var(--main-blue);
+    color: var(--main-blue);
+}
+
+.btn--secondary:not(:disabled):hover {
+    outline: none;
+    background: var(--main-gradient);
+    color: var(--white);
+}
