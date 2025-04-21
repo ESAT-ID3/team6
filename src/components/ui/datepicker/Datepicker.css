@@ -1,0 +1,132 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative; /* Si prefieres dejarlo */
+}
+
+.date-input {
+  width: 100%;
+  max-width: 220px; /* Limitar el tamaño máximo en pantallas grandes */
+  padding: 10px 12px;
+  font-size: 16px;
+  border: 1px solid var(--main-blue);
+  border-radius: 20px;
+  cursor: pointer;
+  margin-bottom: 10px; /* Espaciado entre el input y el datepicker */
+}
+
+.datepicker {
+  background: white;
+  padding: 20px;
+  border: 1px solid;
+  border-color: var(--main-blue);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-width: 340px;
+  min-height: 332px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto; /* Centrado horizontal */
+}
+
+.selectors {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+select {
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.weekdays,
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  text-align: center;
+}
+
+.weekdays div {
+  font-size: 12px;
+  background-color: #f9dfe4;
+  color: #444;
+  padding: 6px 0;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.days div {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+  margin: auto;
+}
+
+.days div:hover {
+  background-color: #eee;
+}
+
+.selected {
+  background-color: #4a00e0;
+  color: white;
+}
+
+.empty {
+  visibility: hidden;
+}
+
+/* Media Queries */
+@media (max-width: 600px) {
+  .datepicker {
+    min-width: 280px;
+    padding: 15px;
+  }
+
+  .date-input {
+    max-width: 100%;
+  }
+
+  select {
+    font-size: 12px;
+  }
+
+  .days div {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 400px) {
+  .datepicker {
+    min-width: 260px;
+    padding: 10px;
+  }
+
+  .date-input {
+    max-width: 100%;
+  }
+
+  select {
+    font-size: 12px;
+  }
+
+  .days div {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+}

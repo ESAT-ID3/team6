@@ -1,6 +1,7 @@
 import './UiKit.css'
 import Header from "../components/layout/header/Header";
 import Button from "../components/ui/button/Button";
+import Datepicker from '../components/ui/datepicker/Datepicker';
 
 
 const UiKit = () => {
@@ -9,7 +10,7 @@ const UiKit = () => {
             <Header></Header>
             <main>
                 <section>
-                    <h4 className='section-title'>Colors</h4>
+                    <h5 className='section-title'>Colors</h5>
                     <div className='horizontal-gallery'>
                         <div style={{
                                     background: 'var(--white)',
@@ -42,7 +43,7 @@ const UiKit = () => {
                     </div>
                 </section>
                 <section>
-                    <h4 className='section-title'>Typographies</h4>
+                    <h5 className='section-title'>Typographies</h5>
                     <div>
                         <h1>This is an h1 tag</h1>
                         <h2>This is an h2 tag</h2>
@@ -55,13 +56,19 @@ const UiKit = () => {
                     </div>
                 </section>
                 <section>
-                    <h4 className='section-title'>Buttons</h4>
+                    <h5 className='section-title'>Buttons</h5>
                     <div className='horizontal-gallery'>
                         <Button label="Primary" isDisabled={false} isFilter={false} variant="primary"></Button>
                         <Button label="Secondary" isDisabled={false} isFilter={false} variant="secondary"></Button>
                         <Button label="Primary" isDisabled={true} isFilter={false} variant="primary"></Button>
                         <Button label="Secondary" isDisabled={true} isFilter={false} variant="secondary"></Button>
                         <Button label="Filter" isDisabled={false} isFilter={true} variant="secondary"></Button>
+                    </div>
+                </section>
+                <section>
+                    <h5 className='section-title'>Datepickers</h5>
+                    <div className='horizontal-gallery'>
+                        <Datepicker></Datepicker>
                     </div>
                 </section>
             </main>
