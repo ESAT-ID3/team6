@@ -4,7 +4,8 @@ header {
     align-content: center;
     background: var(--main-gradient);
     color: var(--white);
-    padding: 20px 18px 20px 18px;
+    padding: 0px 18px 0px 18px;
+    height: 64px;
 }
 
 .header-contents {

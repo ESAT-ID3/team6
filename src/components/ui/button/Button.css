@@ -1,4 +1,5 @@
 .btn {
+    width: fit-content;
     padding: 12px 48px;
     border-radius: 20px;
     font-family: var(--font-main);

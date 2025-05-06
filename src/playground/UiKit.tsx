@@ -66,13 +66,12 @@ const UiKit = () => {
                     </div>
                 </section>
                 <section>
-                    <h5 className='section-title'>Datepickers</h5>
+                    <h5 className='section-title'>Custom inputs</h5>
                     <div className='horizontal-gallery'>
                         <Datepicker></Datepicker>
                     </div>
                 </section>
             </main>
-            
         </>
     )
 }

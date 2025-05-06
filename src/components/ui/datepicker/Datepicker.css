@@ -11,7 +11,7 @@
   padding: 10px 12px;
   font-size: 16px;
   border: 1px solid var(--main-blue);
-  border-radius: 20px;
+  border-radius: 5px;
   cursor: pointer;
   margin-bottom: 10px; /* Espaciado entre el input y el datepicker */
 }

@@ -1,13 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap');
 
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0 auto
-}
-
 :root {
   --white: #FFFFFF;
   --black: #000000;
@@ -26,6 +18,14 @@ body {
   --font-h6: 19.20px;
   --font-p: 16px;
   --font-small: 13.33px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto
 }
 
 /* Typography Styles */
