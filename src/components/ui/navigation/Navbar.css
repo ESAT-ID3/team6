@@ -1,8 +1,29 @@
-nav {
+.nav-highres {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 24px;
+    height: 100%;
+}
+
+.nav-lowres {
+    display: none;
+}
+
+.nav-item {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 12px;
+    padding-right: 12px;
+    cursor: pointer;
+}
+
+/* Hover efecto para ítem principal */
+.nav-item:hover, .nav-item:hover > .nav-link {
+    background: var(--white);
+    color: var(--main-blue);
 }
 
 .nav-link {
@@ -10,4 +31,109 @@ nav {
     font-size: var(--font-p);
     text-decoration: none;
     color: var(--white);
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+/* Dropdown menu (oculto por defecto) */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--white);
+    flex-direction: column;
+    min-width: 160px;
+    border: 1px solid #ccc;
+    z-index: 1000;
+}
+
+/* Enlaces del dropdown */
+.dropdown-link {
+    font-family: var(--font-main);
+    font-size: var(--font-p);
+    text-decoration: none;
+    color: var(--main-blue);
+    padding: 10px 12px;
+    white-space: nowrap;
+}
+
+.dropdown-link:hover {
+    background-color: #f0f0f0;
+}
+
+/* Mostrar el menú cuando se hace hover en el contenedor */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: flex;
+}
+
+
+@media (width < 920px) {
+    .nav-highres {
+        display: none;
+    }
+
+    .nav-lowres {
+        display: flex;
+    }
+
+    button {
+        background: none;
+        width: 35px;
+        height: 35px;
+        border: none;
+    }
+
+    .nav-link {
+        font-family: var(--font-main);
+        font-size: var(--font-p);
+        text-decoration: none;
+        color: var(--white);
+    }
+
+    .offcanvas {
+        position: fixed;
+        top: 0;
+        right: -75%;
+        width: 75%;
+        height: 100%;
+        background: var(--main-gradient);
+        box-shadow: -2px 0 5px rgba(0,0,0,0.3);
+        z-index: 1000;
+        transition: right 0.3s ease-in-out;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .offcanvas.show {
+        right: 0;
+      }
+      
+      .offcanvas-header {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 16px;
+      }
+      
+      .offcanvas-body {
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+        padding: 16px;
+        overflow-y: auto;
+      }
+      
+      /* Optional: dark backdrop when open */
+      .offcanvas-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 999;
+      }
+      
 }

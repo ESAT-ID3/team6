@@ -1,0 +1,26 @@
+.accordion {
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.3s;
+    font-family: var(--font-main);
+    font-size: var(--font-p);
+    text-decoration: none;
+    color: var(--white);
+    padding: 0;
+  }
+  
+  .panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding: 0px 32px; /* Keep horizontal padding */
+  }
+  
+  .panel.open {
+    max-height: 500px; /* Set a high enough max-height for the content */
+  }
+  
+
+  
