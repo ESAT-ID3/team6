@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Playground from './playground/UiKit';
 import Landing from './pages/Landing';
+import Login from './pages/Login';
 import UserArea from './pages/UserArea';
 import Balance from './pages/module_A/Balance';
 import Transactions from './pages/module_A/Transactions';
@@ -15,6 +16,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Landing />} />
+      <Route path="/login" element={<Login />} />
       <Route path="/dev" element={<Playground />} />
       <Route path="/personal/balance" element={<Balance />} />
       <Route path="/user" element={<UserArea />} />

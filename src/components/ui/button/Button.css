@@ -32,3 +32,8 @@
     background: var(--main-gradient);
     color: var(--white);
 }
+
+.btn--full {
+    width: 100%;
+    padding: 12px 0; /* Optional: remove side padding for full-width look */
+}

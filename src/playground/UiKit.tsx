@@ -1,14 +1,27 @@
 import './UiKit.css'
+import { useUser } from '../context/UserContext';
 import Header from "../components/layout/header/Header";
 import Button from "../components/ui/button/Button";
 import Datepicker from '../components/ui/datepicker/Datepicker';
+import Input from '../components/ui/input/Input';
 
 
 const UiKit = () => {
+    const { user } = useUser();
+
     return (
         <>
             <Header></Header>
             <main>
+                <section>
+                    <h5 className='section-title'>Logged Developer</h5>
+                    <div>
+                        <p>Id: {user?.id}</p>
+                        <p>Nombre completo: {user?.name} {user?.surname}</p>
+                        <p>E-mail: {user?.email}</p>
+                        <p>Contraseña cifrada: {user?.password}</p>
+                    </div>
+                </section>
                 <section>
                     <h5 className='section-title'>Colors</h5>
                     <div className='horizontal-gallery'>
@@ -69,6 +82,14 @@ const UiKit = () => {
                     <h5 className='section-title'>Custom inputs</h5>
                     <div className='horizontal-gallery'>
                         <Datepicker></Datepicker>
+                        <Input
+                            headline="Headline"
+                            footer="Footer"
+                            beginningIcon="https://cdn-icons-png.flaticon.com/512/25/25231.png"
+                            endingIcon="https://cdn-icons-png.flaticon.com/512/25/25231.png"
+                            placeholder="Placeholder"
+                            isPassword={false}
+                            onChange={() => { }}></Input>
                     </div>
                 </section>
             </main>

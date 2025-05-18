@@ -1,0 +1,82 @@
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    background: var(--main-gradient);
+    overflow: hidden;
+    padding: 179px 233px;
+}
+
+.main-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url('../assets/backgrounds/dashflow_background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.2; /* controls image transparency */
+    z-index: 0;
+}
+
+.login-card {
+    position: relative; /* Necesario para posicionar el ::before */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100vw;
+    background: transparent; /* fondo transparente porque el fondo estará en el ::before */
+    border-radius: 20px;
+    padding: 75px 50px;
+    overflow: hidden; /* Para que el pseudo-elemento no sobresalga */
+    z-index: 1; /* Asegura que esté por encima del fondo general */
+}
+
+.login-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--white);
+    opacity: 0.2; /* Ajusta aquí la opacidad del fondo blanco */
+    border-radius: 20px;
+    z-index: 0; /* Se coloca detrás del contenido */
+}
+
+.login-card__header {
+    position: relative; /* Para asegurarse de que esté por encima del fondo */
+    color: var(--white); /* Asegúrate de que el texto sea visible */
+    text-align: center;
+    z-index: 1;
+}
+
+.login-card__form {
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    z-index: 1; /* Asegura que el formulario esté por encima del fondo */
+}
+
+.login-error-message {
+    color: var(--main-error);
+    text-align: center;
+}
+
+@media (width < 1240px) {
+    .main-container {
+        padding: 50px 20px;
+    }
+
+    .login-card {
+        flex-direction: column;
+        padding: 20px;
+        width: 90vw; /* Ajusta el ancho según sea necesario */
+        gap: 64px;
+    }
+}
