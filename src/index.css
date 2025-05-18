@@ -5,6 +5,7 @@
   --black: #000000;
   --main-blue: #0122A1;
   --main-purple: #692AFF;
+  --main-error: 		#FFB300;
   --main-gradient: linear-gradient(90deg, var(--main-blue), var(--main-purple));
 
   --font-main: 'Sora', sans-serif;
