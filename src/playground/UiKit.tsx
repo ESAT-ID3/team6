@@ -1,13 +1,44 @@
 import './UiKit.css'
+import { useState , useEffect } from 'react';
 import { useUser } from '../context/UserContext';
+import userService from '../services/firebase/userService';
 import Header from "../components/layout/header/Header";
 import Button from "../components/ui/button/Button";
 import Datepicker from '../components/ui/datepicker/Datepicker';
 import Input from '../components/ui/input/Input';
+import BarChart from '../components/ui/charts/BarChart';
 
 
 const UiKit = () => {
     const { user } = useUser();
+
+    const [labels, setLabels] = useState<string[]>([]);
+    const [incomeData, setIncomeData] = useState<number[]>([]);
+    const [outcomeData, setOutcomeData] = useState<number[]>([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+        if (!user) return;
+
+        const userData = await userService.getBankInfo(user.id);
+        const banks_info = userData?.bank_accounts;
+
+        if (banks_info) {
+            const { labels, incomeData, outcomeData } = await userService.getInfoPerMonth(banks_info);
+
+            const recentLabels = labels.slice(-12);
+            const recentIncomeData = incomeData.slice(-12);
+            const recentOutcomeData = outcomeData.slice(-12);
+
+            setLabels(recentLabels);
+            setIncomeData(recentIncomeData);
+            setOutcomeData(recentOutcomeData);
+        }
+        };
+
+        fetchData();
+    }, [user]);
+    
 
     return (
         <>
@@ -90,6 +121,18 @@ const UiKit = () => {
                             placeholder="Placeholder"
                             isPassword={false}
                             onChange={() => { }}></Input>
+                    </div>
+                </section>
+                <section>
+                    <h5 className='section-title'>Charts</h5>
+                    <div className='horizontal-gallery'>
+                        <div className='chart-container'>
+                            <BarChart
+                                labels={labels}
+                                incomeData={incomeData}
+                                outcomeData={outcomeData}
+                            />
+                        </div>
                     </div>
                 </section>
             </main>

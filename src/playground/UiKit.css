@@ -24,3 +24,8 @@ section {
     flex-wrap: wrap;
     gap: 12px;
 }
+
+.chart-container {
+    width: 400px;
+    height: 250px;
+}
