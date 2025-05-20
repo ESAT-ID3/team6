@@ -7,33 +7,49 @@ import Button from "../components/ui/button/Button";
 import Datepicker from '../components/ui/datepicker/Datepicker';
 import Input from '../components/ui/input/Input';
 import BarChart from '../components/ui/charts/BarChart';
+import PieChart from '../components/ui/charts/PieChart';
 
 
 const UiKit = () => {
     const { user } = useUser();
 
+    // Data for column chart
     const [labels, setLabels] = useState<string[]>([]);
     const [incomeData, setIncomeData] = useState<number[]>([]);
     const [outcomeData, setOutcomeData] = useState<number[]>([]);
 
+    // Data for pie chart
+    const [categories, setCategories] = useState<string[]>([]);
+    const [spendData, setSpendData] = useState<number[]>([]);
+
     useEffect(() => {
         const fetchData = async () => {
-        if (!user) return;
+            if (!user) return;
 
-        const userData = await userService.getBankInfo(user.id);
-        const banks_info = userData?.bank_accounts;
+            const userData = await userService.getBankInfo(user.id);
+            const banks_info = userData?.bank_accounts;
 
-        if (banks_info) {
-            const { labels, incomeData, outcomeData } = await userService.getInfoPerMonth(banks_info);
+            if (banks_info) {
+                // Get the data for the column chart
+                const { labels, incomeData, outcomeData } = userService.getInfoPerMonth(banks_info);
 
-            const recentLabels = labels.slice(-12);
-            const recentIncomeData = incomeData.slice(-12);
-            const recentOutcomeData = outcomeData.slice(-12);
+                const recentLabels = labels.slice(-12);
+                const recentIncomeData = incomeData.slice(-12);
+                const recentOutcomeData = outcomeData.slice(-12);
 
-            setLabels(recentLabels);
-            setIncomeData(recentIncomeData);
-            setOutcomeData(recentOutcomeData);
-        }
+                setLabels(recentLabels);
+                setIncomeData(recentIncomeData);
+                setOutcomeData(recentOutcomeData);
+
+                // Get the data for the pie chart
+                let latestMonth = recentLabels[recentLabels.length - 1];
+            
+                const {categories , spend} = userService.getSpendInfoPerCategory(banks_info, latestMonth);
+                console.log(categories);
+                console.log(spend);
+                setCategories(categories);
+                setSpendData(spend);
+            }
         };
 
         fetchData();
@@ -131,6 +147,12 @@ const UiKit = () => {
                                 labels={labels}
                                 incomeData={incomeData}
                                 outcomeData={outcomeData}
+                            />
+                        </div>
+                        <div className='chart-container'>
+                            <PieChart
+                                labels={categories}
+                                data={spendData}
                             />
                         </div>
                     </div>

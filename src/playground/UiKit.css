@@ -26,6 +26,7 @@ section {
 }
 
 .chart-container {
-    width: 400px;
-    height: 250px;
+    width: calc(50vw - 50px);
+    height: 500px;
 }
+

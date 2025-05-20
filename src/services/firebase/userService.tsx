@@ -47,31 +47,53 @@ const getInfoPerMonth = (banks_info: BankAccountDetails[]) => {
 
     banks_info.forEach((bank) => {
         const transactions = bank.data;
+            transactions.forEach((transaction) => {
+                let date = transaction.date.split("/");
+                let label = date[1] + "/" + date[2];
+                if (!labels.includes(label)) {
+                    labels.push(label);
+                    incomeData.push(0);
+                    outcomeData.push(0);
+                }
+                let index = labels.indexOf(label);
+                if (transaction.amount > 0) {
+                    incomeData[index] += transaction.amount;
+                } else {
+                    outcomeData[index] += Math.abs(transaction.amount);
+                }
+            })
+        })
+        return {
+            labels: labels,
+            incomeData: incomeData,
+            outcomeData: outcomeData
+        }
+}
+
+const getSpendInfoPerCategory = (banks_info: BankAccountDetails[], date: string) => {
+    let labels : string[] = [];
+    let data : number[] = [];
+    banks_info.forEach((bank) => {
+        let transactions = bank.data.filter((transaction) => transaction.amount < 0);
+        transactions = transactions.filter((transaction) => {
+            let transactionDate = transaction.date.split("/");
+            return transactionDate[1] + "/" + transactionDate[2] === date;
+        })
         transactions.forEach((transaction) => {
-            let date = transaction.date.split("/");
-            let label = date[1] + "/" + date[2];
-            if (!labels.includes(label)) {
-                labels.push(label);
-                incomeData.push(0);
-                outcomeData.push(0);
-            }
-            let index = labels.indexOf(label);
-            if (transaction.amount > 0) {
-                incomeData[index] += transaction.amount;
+            let index = labels.indexOf(transaction.category);
+            if (index === -1) {
+                labels.push(transaction.category);
+                data.push(Math.abs(transaction.amount));
             } else {
-                outcomeData[index] += Math.abs(transaction.amount);
+                data[index] += Math.abs(transaction.amount);
             }
         })
     })
+
     return {
-        labels: labels,
-        incomeData: incomeData,
-        outcomeData: outcomeData
+        categories: labels,
+        spend: data
     }
-}
-
-const getSpendInfoPerCategory = () => {
-
 }
 
 export default { logIn , getBankInfo , getInfoPerMonth, getSpendInfoPerCategory };
