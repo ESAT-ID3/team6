@@ -26,7 +26,12 @@ section {
 }
 
 .chart-container {
-    width: calc(50vw - 50px);
+    min-width: calc(50% - 50px);
     height: 500px;
 }
 
+.hash {
+  word-break: break-all;
+  overflow-wrap: break-word;
+  display: inline-block;
+}

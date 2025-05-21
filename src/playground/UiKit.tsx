@@ -66,7 +66,7 @@ const UiKit = () => {
                         <p>Id: {user?.id}</p>
                         <p>Nombre completo: {user?.name} {user?.surname}</p>
                         <p>E-mail: {user?.email}</p>
-                        <p>Contraseña cifrada: {user?.password}</p>
+                        <p>Contraseña cifrada: <span className='hash'>{user?.password}</span></p>
                     </div>
                 </section>
                 <section>

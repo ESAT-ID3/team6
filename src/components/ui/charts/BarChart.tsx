@@ -57,6 +57,9 @@ const BarChart: React.FC<BarChartProps> = ({
         position: 'top',
         labels: {
           color: '#333',
+          font: {
+            family: 'Sora', // Usa directamente el nombre de la fuente
+          },
         },
       },
       title: {
@@ -66,26 +69,36 @@ const BarChart: React.FC<BarChartProps> = ({
         font: {
           size: 16,
           weight: 'bold',
+          family: 'Sora', // Aquí también
         },
       },
     },
     scales: {
       y: {
         ticks: {
-            callback: (value: number | string) => `€${value}`,
-            color: '#333', // opcional
+          callback: (value: number | string) => `€${value}`,
+          color: '#333',
+          font: {
+            family: 'Sora',
+          },
         },
         grid: {
           color: '#e5e7eb',
         },
       },
       x: {
+        ticks: {
+          font: {
+            family: 'Sora',
+          },
+        },
         grid: {
           display: false,
         },
       },
     },
   };
+
 
   return <Bar data={data} options={options} />;
 };
