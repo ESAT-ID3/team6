@@ -61,10 +61,9 @@ const HorizontalBarChart: React.FC<HorizontalBarChartProps> = ({
           const value = context.dataset.data[context.dataIndex] as number;
           return value < 50 ? 'right' : 'center';
         },
-        color: (context) => {
-          const value = context.dataset.data[context.dataIndex] as number;
-          return value < 50 ? '#333' : '#fff';
-        },
+        color: '#fff', // Siempre blanco
+        textStrokeColor: '#000', // Outline violeta
+        textStrokeWidth: 3,
         font: {
           weight: 'bold',
           family: 'Sora',

@@ -5,7 +5,7 @@ export interface Transaction {
   amount: number;
   business: string;
   category: string;
-  date: string; // Puedes convertirlo a `Date` si lo deseas
+  date: string; 
   icon: string;
   id: number;
 }
