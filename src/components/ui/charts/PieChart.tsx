@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Chart as ChartJS,
   ArcElement,
@@ -13,35 +13,23 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 type PieChartProps = {
   labels: string[];
   data: number[];
+  colors: string[];
+  hideLegend?: boolean; // <-- Nueva prop opcional
 };
 
-// Generador de color aleatorio claro
-const getRandomColor = (): string => {
-  const r = Math.floor(Math.random() * 156) + 100;
-  const g = Math.floor(Math.random() * 156) + 100;
-  const b = Math.floor(Math.random() * 156) + 100;
-  return `rgba(${r}, ${g}, ${b}, 0.7)`;
-};
-
-const PieChart: React.FC<PieChartProps> = ({ labels, data }) => {
+const PieChart: React.FC<PieChartProps> = ({ labels, data, colors, hideLegend = false }) => {
   const [legendPosition, setLegendPosition] = useState<'right' | 'bottom'>('right');
 
-  // 📱 Cambia la posición de la leyenda según el tamaño de la pantalla
   useEffect(() => {
     const checkScreenSize = () => {
       const isMobile = window.matchMedia('(max-width: 768px)').matches;
       setLegendPosition(isMobile ? 'bottom' : 'right');
     };
 
-    checkScreenSize(); // al montar
-    window.addEventListener('resize', checkScreenSize); // al cambiar tamaño
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
-
-  // 🎨 Memoriza los colores para que no cambien en cada render
-  const backgroundColors = useMemo(() => {
-    return labels.map(() => getRandomColor());
-  }, [labels.join(',')]); // depende de las etiquetas
 
   const pieData = {
     labels,
@@ -49,7 +37,7 @@ const PieChart: React.FC<PieChartProps> = ({ labels, data }) => {
       {
         label: 'Spending by Category',
         data,
-        backgroundColor: backgroundColors,
+        backgroundColor: colors,
         borderColor: 'white',
         borderWidth: 2,
       },
@@ -60,15 +48,18 @@ const PieChart: React.FC<PieChartProps> = ({ labels, data }) => {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
-      legend: {
-        position: legendPosition,
-        labels: {
-          color: '#333',
-          font: {
-            family: 'Sora',
-          },
-        },
+      datalabels: {
+        display: false,
       },
+      legend: hideLegend
+        ? { display: false }
+        : {
+            position: legendPosition,
+            labels: {
+              color: '#333',
+              font: { family: 'Sora' },
+            },
+          },
       title: {
         display: true,
         text: 'Spending Distribution by Category',

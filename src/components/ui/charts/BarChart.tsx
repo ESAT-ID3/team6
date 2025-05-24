@@ -53,6 +53,9 @@ const BarChart: React.FC<BarChartProps> = ({
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
+      datalabels: {
+        display: false,
+      },
       legend: {
         position: 'top',
         labels: {
