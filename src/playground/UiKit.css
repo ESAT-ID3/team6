@@ -24,3 +24,14 @@ section {
     flex-wrap: wrap;
     gap: 12px;
 }
+
+.chart-container {
+    min-width: calc(50% - 50px);
+    height: 500px;
+}
+
+.hash {
+  word-break: break-all;
+  overflow-wrap: break-word;
+  display: inline-block;
+}

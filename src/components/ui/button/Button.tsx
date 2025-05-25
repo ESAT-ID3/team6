@@ -1,14 +1,15 @@
+<<<<<<< HEAD
 import { useState } from "react";
-import "./Button.css";
+import './Button.css';
 
 interface ButtonProps {
   label: string;
   onClick?: () => void;
   isDisabled: boolean;
   isFilter: boolean;
-  variant: "primary" | "secondary";
+  variant: 'primary' | 'secondary';
+  isActive?: boolean;
   isFullWidth?: boolean;
-  active?: boolean;
 }
 
 const Button = (props: ButtonProps) => {
@@ -18,16 +19,18 @@ const Button = (props: ButtonProps) => {
     isDisabled,
     isFilter,
     variant,
+    isActive = false,
     isFullWidth = undefined,
-    active = false,
   } = props;
 
   let className = isFilter
-    ? `btn ${active ? "btn--primary" : "btn--secondary"}`
+    ? isActive
+      ? 'btn btn--primary'
+      : 'btn btn--secondary'
     : `btn btn--${variant}`;
 
   if (isFullWidth) {
-    className += " btn--full";
+    className += ' btn--full';
   }
 
   const handleClick = () => {

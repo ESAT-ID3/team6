@@ -100,6 +100,7 @@ const Transactions = () => {
                 isFilter={true}
                 isDisabled={false}
                 isFullWidth={false}
+                isActive={tab === "income"}
                 onClick={() => setTab("income")}
               />
               <Button
@@ -108,6 +109,7 @@ const Transactions = () => {
                 isFilter={true}
                 isDisabled={false}
                 isFullWidth={false}
+                isActive={tab === "expense"}
                 onClick={() => setTab("expense")}
               />
             </div>
