@@ -1,12 +1,26 @@
-import React, { useEffect, useRef, useState } from 'react';
-import './Datepicker.css';
+import React, { useEffect, useRef, useState } from "react";
+import "./Datepicker.css";
 
 const months = [
-  'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-  'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+  "Enero",
+  "Febrero",
+  "Marzo",
+  "Abril",
+  "Mayo",
+  "Junio",
+  "Julio",
+  "Agosto",
+  "Septiembre",
+  "Octubre",
+  "Noviembre",
+  "Diciembre",
 ];
 
-const Datepicker: React.FC = () => {
+interface DatepickerProps {
+  onChange: (formattedDate: string) => void;
+}
+
+const Datepicker: React.FC<DatepickerProps> = ({ onChange }) => {
   const [show, setShow] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [month, setMonth] = useState(selectedDate.getMonth());
@@ -14,8 +28,8 @@ const Datepicker: React.FC = () => {
   const ref = useRef<HTMLDivElement>(null);
 
   const formatDate = (date: Date) => {
-    const day = `${date.getDate()}`.padStart(2, '0');
-    const month = `${date.getMonth() + 1}`.padStart(2, '0');
+    const day = `${date.getDate()}`.padStart(2, "0");
+    const month = `${date.getMonth() + 1}`.padStart(2, "0");
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
   };
@@ -27,8 +41,8 @@ const Datepicker: React.FC = () => {
   };
 
   useEffect(() => {
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
   }, []);
 
   const renderDays = () => {
@@ -41,15 +55,19 @@ const Datepicker: React.FC = () => {
     }
 
     for (let d = 1; d <= lastDate; d++) {
-      const isSelected = d === selectedDate.getDate() && month === selectedDate.getMonth() && year === selectedDate.getFullYear();
+      const isSelected =
+        d === selectedDate.getDate() &&
+        month === selectedDate.getMonth() &&
+        year === selectedDate.getFullYear();
       days.push(
         <div
           key={d}
-          className={isSelected ? 'selected' : ''}
+          className={isSelected ? "selected" : ""}
           onClick={() => {
             const newDate = new Date(year, month, d);
             setSelectedDate(newDate);
             setShow(false);
+            onChange(formatDate(newDate));
           }}
         >
           {d}
@@ -75,23 +93,25 @@ const Datepicker: React.FC = () => {
           <div className="selectors">
             <select value={month} onChange={(e) => setMonth(+e.target.value)}>
               {months.map((m, i) => (
-                <option key={m} value={i}>{m}</option>
+                <option key={m} value={i}>
+                  {m}
+                </option>
               ))}
             </select>
             <select value={year} onChange={(e) => setYear(+e.target.value)}>
-              {Array.from({ length: 101 }, (_, i) => 1950 + i).map(y => (
-                <option key={y} value={y}>{y}</option>
+              {Array.from({ length: 101 }, (_, i) => 1950 + i).map((y) => (
+                <option key={y} value={y}>
+                  {y}
+                </option>
               ))}
             </select>
           </div>
           <div className="weekdays">
-            {["DOM", "LUN", "MAR", "MIÉ", "JUE", "VIE", "SÁB"].map(d => (
+            {["DOM", "LUN", "MAR", "MIÉ", "JUE", "VIE", "SÁB"].map((d) => (
               <div key={d}>{d}</div>
             ))}
           </div>
-          <div className="days">
-            {renderDays()}
-          </div>
+          <div className="days">{renderDays()}</div>
         </div>
       )}
     </div>

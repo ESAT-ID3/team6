@@ -1,39 +1,46 @@
-import { useState } from 'react';
-import './Button.css'
+import { useState } from "react";
+import "./Button.css";
 
 interface ButtonProps {
-    label: string;
-    onClick?: () => void;
-    isDisabled: boolean;
-    isFilter: boolean;
-    variant: 'primary' | 'secondary';
-    isFullWidth?: boolean;
+  label: string;
+  onClick?: () => void;
+  isDisabled: boolean;
+  isFilter: boolean;
+  variant: "primary" | "secondary";
+  isFullWidth?: boolean;
+  active?: boolean;
 }
 
-const Button = (props : ButtonProps) => {
-    const { label, onClick = undefined, isDisabled, isFilter, variant, isFullWidth = undefined } = props;
-    const [active, setActive] = useState(false);
+const Button = (props: ButtonProps) => {
+  const {
+    label,
+    onClick = undefined,
+    isDisabled,
+    isFilter,
+    variant,
+    isFullWidth = undefined,
+    active = false,
+  } = props;
 
-    let className = isFilter ? (active ? `btn btn--primary` : `btn btn--secondary`) : `btn btn--${variant}`;
+  let className = isFilter
+    ? `btn ${active ? "btn--primary" : "btn--secondary"}`
+    : `btn btn--${variant}`;
 
-    if (isFullWidth) {
-        className += ' btn--full';
+  if (isFullWidth) {
+    className += " btn--full";
+  }
+
+  const handleClick = () => {
+    if (!isDisabled && onClick) {
+      onClick();
     }
+  };
 
-    const handleClick = () => {
-        if (!isDisabled) {
-            if (isFilter) {
-                setActive(!active);
-            }
-            if (onClick) {
-                onClick();
-            }
-        }
-    }
+  return (
+    <button onClick={handleClick} disabled={isDisabled} className={className}>
+      {label}
+    </button>
+  );
+};
 
-    return (
-        <button onClick={handleClick} disabled={isDisabled} className={className}>{label}</button>
-    )
-}
-
-export default Button
+export default Button;

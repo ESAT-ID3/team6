@@ -1,0 +1,40 @@
+.transaction-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  border-radius: 30px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.transaction-card__icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--main-gradient);
+}
+
+.transaction-card__content {
+  flex: 1;
+  margin-left: 10px;
+}
+
+.transaction-card__content h4 {
+  font-size: clamp(16px, 2vw, 20px);
+  margin: 0;
+}
+
+.transaction-card__content p {
+  margin: 5px 0 0 0;
+  font-size: clamp(12px, 1.5vw, 16px);
+}
+
+.transaction-card__amount {
+  font-family: var(--font-main);
+  font-size: clamp(12px, 1.5vw, 20px);
+  font-weight: medium;
+}
