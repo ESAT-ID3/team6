@@ -1,0 +1,34 @@
+main {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+}
+
+.filter-gallery {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.bar-chart-container {
+    width: calc(100vw - 50px);
+    height: 500px;
+}
+
+.gauge-gallery-container {
+}
+
+.chart-gallery {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.chart-gallery__item {
+    min-width: calc(50% - 50px);
+    height: 500px;
+}
