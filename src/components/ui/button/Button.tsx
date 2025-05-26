@@ -1,13 +1,15 @@
-import './Button.css'
+<<<<<<< HEAD
+import { useState } from "react";
+import './Button.css';
 
 interface ButtonProps {
-    label: string;
-    onClick?: () => void;
-    isDisabled: boolean;
-    isFilter: boolean;
-    variant: 'primary' | 'secondary';
-    isActive?: boolean;
-    isFullWidth?: boolean;
+  label: string;
+  onClick?: () => void;
+  isDisabled: boolean;
+  isFilter: boolean;
+  variant: 'primary' | 'secondary';
+  isActive?: boolean;
+  isFullWidth?: boolean;
 }
 
 const Button = (props: ButtonProps) => {
