@@ -32,9 +32,6 @@ function Navbar() {
             <div className="nav-item"> 
               <Link to="/" className='nav-link'>Home</Link>
             </div>
-            <div className="nav-item"> 
-              <Link to="/user" className='nav-link'>Mi Perfil</Link>
-            </div>
             {canSeePersonal && (
               <div className="nav-item dropdown">
                 <span className="nav-link">Finanzas personales ▼</span>
@@ -57,6 +54,9 @@ function Navbar() {
                 </div>
               </div>
             )}
+            <div className="nav-item"> 
+              <Link to="/user" className='nav-link'>Mi Perfil</Link>
+            </div>
           </>
         )}
       </nav>

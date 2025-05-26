@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from "react";
 import "./Transactions.css";
 import api from "../../services/firebase/firebaseTransactions";
+import { useUser } from '../../context/UserContext';
+import userService from "../../services/firebase/userService";
 import Button from "../../components/ui/button/Button";
 import Header from "../../components/layout/header/Header";
 import TransactionCard from "../../components/ui/transactionCard/TransactionCard";
 
 type Transaction = {
   id: string;
+  icon: string;
   concept: string;
   amount: number;
   date: string;
 };
 
 const Transactions = () => {
+  const { user } = useUser();
+
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [filtered, setFiltered] = useState<Transaction[]>([]);
   const [search, setSearch] = useState("");
@@ -20,25 +25,25 @@ const Transactions = () => {
 
   useEffect(() => {
     const fetchTransactions = async () => {
-      try {
-        const data = await api.getData("bank_data", "47291358T");
-        console.log("DATA FROM FIREBASE ===>", data);
+      if (!user) return;
+      const userData = await userService.getBankInfo(user.id);
+      const banks_info = userData?.bank_accounts;
 
-        const rawTransactions = data?.bank_accounts?.[0]?.data || [];
+      if (banks_info) {
+        let parsed: any[] = [];
+        banks_info.forEach((bank: any) => {
+          let aux = bank.data.map((item: any) => ({
+            id: `${bank.bank_name}_${item.id}`,
+            concept: item.business ?? "Sin concepto",
+            amount: item.amount,
+            date: item.date,
+            icon: item.icon,
+          }));
+          parsed = [...parsed, ...aux];
+        });
 
-        const parsed = rawTransactions.map((item: any) => ({
-          id: String(item.id),
-          concept: item.business ?? "Sin concepto",
-          amount: item.amount,
-          date: item.date,
-          icon: item.icon,
-        }));
-
-        console.log("Ejemplo de transacción:", parsed[0]);
-
+        console.log(parsed);
         setTransactions(parsed);
-      } catch (error) {
-        console.error("Error al cargar transacciones:", error);
       }
     };
 
