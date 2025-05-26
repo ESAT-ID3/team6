@@ -17,7 +17,7 @@ const months = [
 ];
 
 interface DatepickerProps {
-  onChange: (formattedDate: string) => void;
+  onChange?: (formattedDate: string) => void;
 }
 
 const Datepicker: React.FC<DatepickerProps> = ({ onChange }) => {
@@ -67,7 +67,9 @@ const Datepicker: React.FC<DatepickerProps> = ({ onChange }) => {
             const newDate = new Date(year, month, d);
             setSelectedDate(newDate);
             setShow(false);
-            onChange(formatDate(newDate));
+            if (onChange) {
+              onChange(formatDate(newDate));
+            }
           }}
         >
           {d}
