@@ -18,7 +18,7 @@ const months = [
 ];
 
 interface DatepickerProps {
-  onRangeChange: (start: string, end: string) => void;
+  onChange?: (formattedDate: string) => void;
 }
 
 const Datepicker: React.FC<DatepickerProps> = ({ onRangeChange }) => {
@@ -71,10 +71,15 @@ const Datepicker: React.FC<DatepickerProps> = ({ onRangeChange }) => {
       days.push(
         <div
           key={d}
-          className={`day ${isSelected ? "selected" : ""} ${
-            isInRange ? "in-range" : ""
-          }`}
-          onClick={() => handleDateClick(d)}
+          className={isSelected ? "selected" : ""}
+          onClick={() => {
+            const newDate = new Date(year, month, d);
+            setSelectedDate(newDate);
+            setShow(false);
+            if (onChange) {
+              onChange(formatDate(newDate));
+            }
+          }}
         >
           {d}
         </div>
