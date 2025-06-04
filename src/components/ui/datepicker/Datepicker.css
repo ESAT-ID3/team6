@@ -1,21 +1,3 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  position: relative;
-}
-
-.date-input {
-  width: 100%;
-  max-width: 220px;
-  padding: 10px 12px;
-  font-size: 16px;
-  border: 1px solid var(--main-blue);
-  border-radius: 5px;
-  cursor: pointer;
-  margin-bottom: 10px;
-}
-
 .datepicker {
   background: white;
   padding: 24px;
@@ -54,6 +36,7 @@ select {
   font-weight: 500;
   text-transform: uppercase;
 }
+
 .days div {
   width: 44px;
   height: 44px;
@@ -68,14 +51,15 @@ select {
   transition: all 0.2s ease;
 }
 
-.days div:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
 .day.selected {
-  background: var(--main-gradient);
+  background-color: var(--main-purple);
   color: white;
   font-weight: bold;
+}
+
+.day.in-range {
+  background-color: rgba(1, 34, 161, 0.1);
+  color: var(--black);
 }
 
 .empty {
@@ -92,15 +76,10 @@ select {
   -webkit-text-fill-color: transparent;
 }
 
-/* Media Queries */
 @media (max-width: 1300px) {
   .datepicker {
     min-width: 280px;
     padding: 15px;
-  }
-
-  .date-input {
-    max-width: 100%;
   }
 
   select {
@@ -120,10 +99,6 @@ select {
     padding: 10px;
   }
 
-  .date-input {
-    max-width: 100%;
-  }
-
   select {
     font-size: 12px;
   }
@@ -133,23 +108,4 @@ select {
     height: 28px;
     font-size: 12px;
   }
-}
-
-.transactions__filters {
-  margin-top: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.day.selected {
-  background-color: var(--main-purple);
-  color: white;
-  border-radius: 50%;
-}
-
-.day.in-range {
-  background-color: rgba(1, 34, 161, 0.1); /* var(--main-blue) con opacidad */
-  border-radius: 50%;
-  color: var(--black);
 }

@@ -18,7 +18,15 @@ const BankFilter = ({ banks, selected, onChange }: Props) => {
             className={`bank-filter__button ${
               selected === bank ? "active" : ""
             }`}
-            onClick={() => onChange(bank)}
+            onClick={() => {
+              if (selected === bank) {
+                // Si ya está seleccionado, lo deselecciona
+                onChange("");
+              } else {
+                // Si es otro, lo selecciona
+                onChange(bank);
+              }
+            }}
           >
             {bank}
           </button>

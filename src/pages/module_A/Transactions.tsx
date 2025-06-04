@@ -42,7 +42,7 @@ const Transactions = () => {
   const [selectedBank, setSelectedBank] = useState<string>("");
   const [showFiltersModal, setShowFiltersModal] = useState(false);
 
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
@@ -68,7 +68,6 @@ const Transactions = () => {
         });
 
         const uniqueCategoriesMap = new Map<string, string>();
-
         parsed.forEach((item) => {
           if (item.category && item.icon) {
             uniqueCategoriesMap.set(item.category, item.icon);
@@ -80,8 +79,6 @@ const Transactions = () => {
         );
 
         setCategories(categoryArray);
-
-        console.log(parsed);
         console.log("PARSED TRANSACTIONS:", parsed);
         setTransactions(parsed);
 
@@ -145,6 +142,10 @@ const Transactions = () => {
       result = result.filter((t) => t.id.startsWith(selectedBank));
     }
 
+    if (selectedCategories.length > 0) {
+      result = result.filter((t) => selectedCategories.includes(t.category));
+    }
+
     result.sort((a, b) => {
       const [dayA, monthA, yearA] = a.date.split("/").map(Number);
       const [dayB, monthB, yearB] = b.date.split("/").map(Number);
@@ -154,10 +155,6 @@ const Transactions = () => {
 
       return dateB.getTime() - dateA.getTime();
     });
-
-    if (selectedCategory) {
-      result = result.filter((t) => t.category === selectedCategory);
-    }
 
     setFiltered(result);
   }, [
@@ -169,8 +166,9 @@ const Transactions = () => {
     startDate,
     endDate,
     selectedBank,
-    selectedCategory, // <-- Agregado
+    selectedCategories, // 👈 actualizado aquí
   ]);
+
   console.log(filtered);
 
   return (
@@ -214,6 +212,7 @@ const Transactions = () => {
                 </span>
               </button>
             </div>
+
             {showFiltersModal && (
               <div className="mobile-only-modal">
                 <FilterModal
@@ -231,8 +230,8 @@ const Transactions = () => {
                   selectedBank={selectedBank}
                   setSelectedBank={setSelectedBank}
                   categories={categories}
-                  selectedCategory={selectedCategory}
-                  setSelectedCategory={setSelectedCategory}
+                  selectedCategory={""} // actualiza esto si usas categorías en el modal también
+                  setSelectedCategory={() => {}} // idem
                 />
               </div>
             )}
@@ -264,8 +263,8 @@ const Transactions = () => {
               {categories.length > 1 && (
                 <CategoryFilter
                   categories={categories}
-                  selected={selectedCategory}
-                  onChange={(cat) => setSelectedCategory(cat)}
+                  selected={selectedCategories}
+                  onChange={setSelectedCategories}
                 />
               )}
             </div>

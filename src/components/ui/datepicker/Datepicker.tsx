@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import "./Datepicker.css";
 
 const months = [
@@ -18,7 +17,7 @@ const months = [
 ];
 
 interface DatepickerProps {
-  onChange?: (formattedDate: string) => void;
+  onRangeChange?: (startDate: string, endDate: string) => void;
 }
 
 const Datepicker: React.FC<DatepickerProps> = ({ onRangeChange }) => {
@@ -34,23 +33,6 @@ const Datepicker: React.FC<DatepickerProps> = ({ onRangeChange }) => {
     return `${day}/${monthStr}/${yearStr}`;
   };
 
-  const handleDateClick = (day: number) => {
-    const clickedDate = new Date(year, month, day);
-
-    if (!startDate || (startDate && endDate)) {
-      setStartDate(clickedDate);
-      setEndDate(null);
-      onRangeChange(formatDate(clickedDate), "");
-    } else if (clickedDate >= startDate) {
-      setEndDate(clickedDate);
-      onRangeChange(formatDate(startDate), formatDate(clickedDate));
-    } else {
-      setStartDate(clickedDate);
-      setEndDate(null);
-      onRangeChange(formatDate(clickedDate), "");
-    }
-  };
-
   const renderDays = () => {
     const days = [];
     const firstDay = new Date(year, month, 1).getDay();
@@ -62,24 +44,44 @@ const Datepicker: React.FC<DatepickerProps> = ({ onRangeChange }) => {
 
     for (let d = 1; d <= lastDate; d++) {
       const current = new Date(year, month, d);
-      const isInRange =
-        startDate && endDate && current > startDate && current < endDate;
       const isSelected =
         current.getTime() === startDate?.getTime() ||
         current.getTime() === endDate?.getTime();
 
+      const isInRange =
+        startDate &&
+        endDate &&
+        current.getTime() > startDate.getTime() &&
+        current.getTime() < endDate.getTime();
+
+      const handleClick = () => {
+        if (startDate?.getTime() === current.getTime() && !endDate) {
+          setStartDate(null);
+          onRangeChange?.("", "");
+        } else if (endDate?.getTime() === current.getTime()) {
+          setEndDate(null);
+          onRangeChange?.(formatDate(startDate!), "");
+        } else if (!startDate || (startDate && endDate)) {
+          setStartDate(current);
+          setEndDate(null);
+          onRangeChange?.(formatDate(current), "");
+        } else if (startDate && current > startDate) {
+          setEndDate(current);
+          onRangeChange?.(formatDate(startDate), formatDate(current));
+        } else {
+          setStartDate(current);
+          setEndDate(null);
+          onRangeChange?.(formatDate(current), "");
+        }
+      };
+
       days.push(
         <div
           key={d}
-          className={isSelected ? "selected" : ""}
-          onClick={() => {
-            const newDate = new Date(year, month, d);
-            setSelectedDate(newDate);
-            setShow(false);
-            if (onChange) {
-              onChange(formatDate(newDate));
-            }
-          }}
+          className={`day ${isSelected ? "selected" : ""} ${
+            isInRange ? "in-range" : ""
+          }`}
+          onClick={handleClick}
         >
           {d}
         </div>
