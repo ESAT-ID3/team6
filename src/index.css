@@ -1,14 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap");
 
 :root {
-  --white: #FFFFFF;
+  --white: #ffffff;
   --black: #000000;
-  --main-blue: #0122A1;
-  --main-purple: #692AFF;
-  --main-error: 		#FFB300;
+  --main-blue: #0122a1;
+  --main-purple: #692aff;
+  --main-error: #ffb300;
   --main-gradient: linear-gradient(90deg, var(--main-blue), var(--main-purple));
 
-  --font-main: 'Sora', sans-serif;
+  --font-main: "Sora", sans-serif;
 
   /* Font Sizes */
   --font-h1: 47.78px;
@@ -16,7 +16,7 @@
   --font-h3: 33.18px;
   --font-h4: 27.65px;
   --font-h5: 23.04px;
-  --font-h6: 19.20px;
+  --font-h6: 19.2px;
   --font-p: 16px;
   --font-small: 13.33px;
 }
@@ -26,11 +26,18 @@
 }
 
 body {
-  margin: 0 auto
+  margin: 0 auto;
 }
 
 /* Typography Styles */
-h1, h2, h3, h4, h5, h6, p, small {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+small {
   font-family: var(--font-main);
   margin: 0;
 }

@@ -1,0 +1,65 @@
+body {
+  font-family: var(--font-main);
+  background-color: var(--white);
+}
+
+.bank-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 100%;
+  max-width: 100%;
+}
+
+.bank-filter > label {
+  font-size: var(--font-h6);
+  font-weight: 400;
+  color: var(--main-blue);
+  padding-bottom: 0.4rem;
+  border-bottom: 1.5px solid var(--main-blue);
+}
+
+.bank-filter__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.bank-filter__button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.25rem;
+  border-radius: 20px;
+  font-weight: 400;
+  font-size: var(--font-p);
+  color: var(--main-purple);
+  background: white;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  min-height: 48px;
+  z-index: 0;
+  overflow: hidden;
+  transition: background 0.3s, color 0.3s;
+}
+
+.bank-filter__button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  padding: 1.2px;
+  background: var(--main-gradient);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+}
+
+.bank-filter__button.active {
+  background: var(--main-gradient);
+  color: white;
+}

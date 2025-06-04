@@ -7,6 +7,10 @@
   padding: 20px;
   margin-bottom: 20px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .transaction-card__icon {
@@ -15,7 +19,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--main-gradient);
 }
 
 .transaction-card__content {
@@ -36,5 +39,5 @@
 .transaction-card__amount {
   font-family: var(--font-main);
   font-size: clamp(12px, 1.5vw, 20px);
-  font-weight: medium;
+  font-weight: 400;
 }
