@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./Transactions.css";
-import api from "../../services/firebase/firebaseTransactions";
 import { useUser } from "../../context/UserContext";
 import userService from "../../services/firebase/userService";
 import Button from "../../components/ui/button/Button";

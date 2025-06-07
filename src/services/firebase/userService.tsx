@@ -96,4 +96,47 @@ const getSpendInfoPerCategory = (banks_info: BankAccountDetails[], date: string)
     }
 }
 
-export default { logIn , getBankInfo , getInfoPerMonth, getSpendInfoPerCategory };
+const getSpendCategories = async () => {
+    const categoriesData = await firebase.getData("categories_data", "cat");
+    if (categoriesData) {
+        return categoriesData.categories;
+    }
+    return null;
+}
+
+const getPreviousBudgets = async (userId: string | undefined) => {
+    if (!userId) {
+        return null;
+    }
+    const budgetsData = await firebase.getData("previous_budgets", userId);
+    if (budgetsData) {
+        console.log("Budgets Data:", budgetsData);
+        return getLastSixMonthsBudgets(budgetsData);
+    }
+    return null;
+}
+
+function getLastSixMonthsBudgets(budgetsData : any) {
+  const result = [];
+  
+  let date = new Date();
+  date.setDate(1); // set to first day to avoid edge cases
+  date.setMonth(date.getMonth() - 1); // start from previous month
+
+  for (let i = 0; i < 6; i++) {
+    const mm = String(date.getMonth() + 1).padStart(2, '0');
+    const yyyy = date.getFullYear();
+    const key = `${mm}/${yyyy}`;
+
+    if (budgetsData[key]) {
+      result.push(budgetsData[key]);
+    }
+
+    date.setMonth(date.getMonth() - 1); // go to previous month
+  }
+
+  return result;
+}
+
+
+export default { logIn , getBankInfo , getInfoPerMonth, getSpendInfoPerCategory, getSpendCategories, getPreviousBudgets };

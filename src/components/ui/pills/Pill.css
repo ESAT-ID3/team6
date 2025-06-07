@@ -1,0 +1,24 @@
+/* components/ui/pill/Pill.css */
+
+.pill {
+  display: inline-block;
+  background: linear-gradient(to right, #1e3a8a, #7c3aed); /* Blue to violet */
+  padding: 1rem 1.5rem;
+  color: white;
+  font-family: var(--font-main);
+  text-align: left;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.pill--full {
+  width: 100%;
+}
+
+.pill__header {
+  font-size: var(--font-small);
+}
+
+.pill__value {
+  font-size: var(--font-h4);
+}
