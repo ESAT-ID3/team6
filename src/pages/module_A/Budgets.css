@@ -17,6 +17,7 @@
   flex: 3;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   background: linear-gradient(
     to bottom,
     rgba(63, 25, 153, 0.15) 85%,

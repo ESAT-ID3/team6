@@ -63,6 +63,9 @@ const getInfoPerMonth = (banks_info: BankAccountDetails[]) => {
                 }
             })
         })
+        console.log("Labels:", labels);
+        console.log("Income Data:", incomeData);
+        console.log("Outcome Data:", outcomeData);
         return {
             labels: labels,
             incomeData: incomeData,

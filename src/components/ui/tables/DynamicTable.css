@@ -1,0 +1,23 @@
+.dynamic-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--main-font);
+}
+
+.dynamic-table thead {
+  background: var(--main-blue); 
+  color: white;
+}
+
+.dynamic-table th,
+.dynamic-table td {
+  border: 1px solid var(--main-blue); 
+  padding: 10px 12px;
+  text-align: left;
+}
+
+.dynamic-table tbody td {
+  color: var(--main-blue);
+}
+
+
