@@ -5,11 +5,13 @@
   margin: 0 auto;
   padding: 0;
   height: calc(100vh - 64px);
+  overflow: hidden; /* Previene desbordes hacia afuera */
 }
 
-.current-budget, .budget-history {
-    border: none;
-    border-radius: 0;
+.current-budget,
+.budget-history {
+  border: none;
+  border-radius: 0;
 }
 
 /* Sección de presupuesto actual (75%) */
@@ -17,13 +19,13 @@
   flex: 3;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   background: linear-gradient(
     to bottom,
     rgba(63, 25, 153, 0.15) 85%,
     rgba(177, 145, 255, 0.15) 100%
-    );
-
+  );
+  overflow-y: auto; /* Scroll vertical si el contenido excede */
+  padding: 16px;
 }
 
 /* Sección de historial (25%) */
@@ -37,8 +39,7 @@
     to bottom,
     rgba(63, 25, 153, 0.5) 75%,
     rgba(105, 42, 255, 0.5) 100%
-    );
-
+  );
 }
 
 /* Distribución de las pills */
@@ -47,25 +48,35 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 12px;
+  padding: 12px;
 }
 
-/* Placeholder para tabla */
+/* Tabla: contenedor con scroll si es necesario */
 .current-budget__table {
-
+  flex-grow: 1;
+  overflow-x: auto;
+  overflow-y: auto;
+  max-height: 60vh; /* Ajusta según tu diseño */
+  margin: 16px 0;
 }
 
 /* Acciones como botones o formularios */
-.current-budget__actions {
-
+.current-budget__actions,
+.current-budget__no-budget {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 16px;
 }
 
 /* Historial de presupuestos como galería o lista */
 .budget-history__gallery {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 12px;
-    padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px;
 }
 
 .budget-history__gallery__item {
@@ -75,4 +86,35 @@
   justify-content: space-between;
   width: 100%;
   padding: 16px;
+}
+
+.budget-history__gallery__item__info {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.budget-history__gallery__item__info img {
+  width: 24px;
+  height: 24px;
+}
+
+.current-budget__table {
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(63, 25, 153, 0.4) transparent;
+}
+
+.current-budget__table::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.current-budget__table::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.current-budget__table::-webkit-scrollbar-thumb {
+  background-color: rgba(63, 25, 153, 0.4);
+  border-radius: 3px;
 }
