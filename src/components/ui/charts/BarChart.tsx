@@ -55,7 +55,7 @@ const BarChart: React.FC<BarChartProps> = ({
   const options: ChartOptions<'bar'> = {
     responsive: true,
     maintainAspectRatio: false,
-    onClick: (event, elements, chart) => {
+    onClick: (event) => {
       const chartInstance = chartRef.current;
       if (!chartInstance) return;
 

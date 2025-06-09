@@ -1,4 +1,3 @@
-import React from "react";
 import AmountFilter from "../amountFilter/AmountFilter";
 import Datepicker from "../datepicker/Datepicker";
 import BankFilter from "../bankFilter/BankFilter";
@@ -33,8 +32,6 @@ const FilterModal = ({
   maxAmount,
   setMinAmount,
   setMaxAmount,
-  startDate,
-  endDate,
   setStartDate,
   setEndDate,
   bankList,
@@ -75,8 +72,11 @@ const FilterModal = ({
         {categories.length > 1 && (
           <CategoryFilter
             categories={categories}
-            selected={selectedCategory}
-            onChange={setSelectedCategory}
+            selected={selectedCategory ? [selectedCategory] : []}
+            onChange={(updated) => {
+              // Only one category selected at a time
+              setSelectedCategory(updated[0] || "");
+            }}
           />
         )}
 
@@ -86,6 +86,8 @@ const FilterModal = ({
             variant="primary"
             isFullWidth={false}
             onClick={onApply}
+            isDisabled={false}
+            isFilter={false}
           />
         </div>
       </div>

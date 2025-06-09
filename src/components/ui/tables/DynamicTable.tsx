@@ -18,12 +18,15 @@ const DynamicTable = ({ labels, data }: TableProps) => {
       <tbody>
         {data.map((row, rowIndex) => (
           <tr key={rowIndex}>
-            {labels.map((label, colIndex) => (
-              <td key={colIndex}>
-                {/* Convert label to lowercase or key-friendly string if needed */}
-                {row[Object.keys(row)[colIndex]]}
-              </td>
-            ))}
+            {labels.map((label, colIndex : any) => {
+              console.log(label);
+              return (
+                <td key={colIndex}>
+                  {/* Convert label to lowercase or key-friendly string if needed */}
+                  {row[Object.keys(row)[colIndex]]}
+                </td>
+              );
+            })}
           </tr>
         ))}
       </tbody>

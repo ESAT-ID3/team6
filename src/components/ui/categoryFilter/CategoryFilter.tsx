@@ -1,4 +1,3 @@
-import React from "react";
 import "./CategoryFilter.css";
 
 type Category = {
@@ -15,10 +14,10 @@ type Props = {
 const CategoryFilter = ({ categories, selected, onChange }: Props) => {
   const toggleCategory = (name: string) => {
     if (selected.includes(name)) {
-      // Si ya está seleccionada, se deselecciona
+      // Deselect
       onChange(selected.filter((c) => c !== name));
     } else {
-      // Si no está, se añade
+      // Select
       onChange([...selected, name]);
     }
   };

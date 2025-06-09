@@ -1,7 +1,7 @@
 const apiKey = "38ebe4f9460149ef898cd38c67f27db9"
 
 // THIS WILL GO IN THE FRONTEND, SINCE IT WILL BE USED FOR EVERY ASSET
-let interval = ["4 hours", "1 day", "1 week", "1 month"];
+//let interval = ["4 hours", "1 day", "1 week", "1 month"];
 
 // Function to format the date in the way the API expects it
 function getFormattedDate(date : Date) {

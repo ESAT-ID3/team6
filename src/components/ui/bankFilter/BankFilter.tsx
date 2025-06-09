@@ -1,4 +1,3 @@
-import React from "react";
 import "./BankFilter.css";
 
 type Props = {

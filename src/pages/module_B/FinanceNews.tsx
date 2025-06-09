@@ -30,7 +30,7 @@ const FinanceNews: React.FC = () => {
           }));
 
           // Ordenar por fecha descendente
-          formatted.sort((a, b) => {
+          formatted.sort((a : any, b : any) => {
             const [dayA, monthA, yearA] = a.time_published
               .split("/")
               .map(Number);

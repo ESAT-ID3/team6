@@ -24,7 +24,7 @@ const Budgets = () => {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
 
   const [currentMonthSpend, setCurrentMonthSpend] = useState<{ category: string; spend: number }[]>([]);
-
+  const labels = ["Categoría", "Límite", "Gasto", "Ahorro"];
   useEffect(() => {
     const fetchData = async () => {
       const categories = await userService.getSpendCategories();
@@ -32,6 +32,7 @@ const Budgets = () => {
 
       userService.getPreviousBudgets(user?.id).then((budgets) => {
         setPreviousBudgets(budgets || []);
+        console.log(budgets);
       });
 
       const spendData = await userService.getCurrentMonthData(user?.id);
@@ -39,6 +40,10 @@ const Budgets = () => {
 
       const budgetData = await userService.getCurrentBudget(user?.id);
       updateBudget(budgetData || [], spendData || []);
+
+      console.log("Presupuesto actual:", budgetData);
+      console.log("Gastos del mes actual:", spendData);
+      
     };
 
     fetchData();
@@ -121,7 +126,7 @@ const Budgets = () => {
               </div>
               <div className="current-budget__table">
                 <DynamicTable
-                  labels={["Categoría", "Límite", "Gasto", "Ahorro"]}
+                  labels={labels}
                   data={currentBudget}
                 />
               </div>

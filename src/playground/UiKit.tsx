@@ -24,14 +24,14 @@ const UiKit = () => {
     const [spendData, setSpendData] = useState<number[]>([]);
     const [categoryColors, setCategoryColors] = useState<string[]>([]);
 
-    const [tableLabels, setTableLabels] = useState<string[]>(["Categoría","Límite","Gasto","Ahorro"]);
-    const [tableData, setTableData] = useState<Record<string, any>[]>([
+    let tableLabels = ["Categoría","Límite","Gasto","Ahorro"]
+    let tableData = [
         { categoria: "Comida", limite: 300, gasto: 250, ahorro: 50 },
         { categoria: "Transporte", limite: 150, gasto: 100, ahorro: 50 },
         { categoria: "Ocio", limite: 200, gasto: 180, ahorro: 20 },
         { categoria: "Suscripciones", limite: 100, gasto: 90, ahorro: 10 },
         { categoria: "Otros", limite: 250, gasto: 220, ahorro: 30 },
-    ]);
+    ]
 
     const getRandomColor = (): string => {
         const r = Math.floor(Math.random() * 156) + 100;
