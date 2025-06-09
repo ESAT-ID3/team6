@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, doc, getDoc, DocumentSnapshot, DocumentData } from "firebase/firestore";
+import { getFirestore, doc, setDoc, getDoc, DocumentSnapshot, DocumentData } from "firebase/firestore";
 
 // Firebase config
 const firebaseConfig = {
@@ -30,4 +30,15 @@ async function getData(collectionName: string, docId: string): Promise<DocumentD
     }
 }
 
-export default { getData };
+async function setData(collectionName: string, docId: string, data: any): Promise<void> {
+    const docRef = doc(db, collectionName, docId);  // Reference to the document
+
+    try {
+        await setDoc(docRef, data);
+        console.log(`Document ${docId} in '${collectionName}' successfully written!`);
+    } catch (error) {
+        console.error("Error writing document:", error);
+    }
+}
+
+export default { getData, setData };

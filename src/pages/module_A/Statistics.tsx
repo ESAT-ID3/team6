@@ -35,9 +35,9 @@ const Statistics = () => {
 
   function getBarChartData(banks_info: any[]) {
     const { labels, incomeData, outcomeData } = userService.getInfoPerMonth(banks_info);
-    const recentLabels = labels.slice(-12);
-    const recentIncomeData = incomeData.slice(-12);
-    const recentOutcomeData = outcomeData.slice(-12);
+    const recentLabels = labels.slice(0, 12).reverse();
+    const recentIncomeData = incomeData.slice(0, 12).reverse();
+    const recentOutcomeData = outcomeData.slice(0, 12).reverse();
     return { labels: recentLabels, incomeData: recentIncomeData, outcomeData: recentOutcomeData };
   }
 
@@ -55,7 +55,7 @@ const Statistics = () => {
 
       if (banks_info) {
         setBanksInfo(banks_info); 
-
+        console.log('Banks Info:', banks_info);
         const { labels, incomeData, outcomeData } = getBarChartData(banks_info);
         setLabels(labels);
         setIncomeData(incomeData);
