@@ -110,7 +110,6 @@ const getPreviousBudgets = async (userId: string | undefined) => {
     }
     const budgetsData = await firebase.getData("previous_budgets", userId);
     if (budgetsData) {
-        console.log("Budgets Data:", budgetsData);
         return getLastSixMonthsBudgets(budgetsData);
     }
     return null;
@@ -183,6 +182,25 @@ async function getCurrentMonthData(userId: string | undefined) {
   return null;
 }
 
+async function getCurrentBudget(userId: string | undefined) {
+    if (!userId) {
+        return null;
+    }
+    const docId = `${userId}`;
+    const budgetData = await firebase.getData("current_budget", docId);
+    if (budgetData) {
+        let result: { category: string; limit: number }[] = [];
+        budgetData.limits.forEach((limit: any) => {
+            result.push({
+                category: limit.category,
+                limit: limit.limit
+            });
+        });
+        return result; 
+    }
+    return null;
+}
+
 async function storeCurrentBudget(userId: string | undefined, data: any): Promise<boolean> {
     if (!userId) {
         return false;
@@ -193,4 +211,4 @@ async function storeCurrentBudget(userId: string | undefined, data: any): Promis
 }
 
 
-export default { logIn , getBankInfo , getInfoPerMonth, getSpendInfoPerCategory, getSpendCategories, getPreviousBudgets, getCurrentMonthData, storeCurrentBudget };
+export default { logIn , getBankInfo , getInfoPerMonth, getSpendInfoPerCategory, getSpendCategories, getPreviousBudgets, getCurrentMonthData, getCurrentBudget, storeCurrentBudget };

@@ -34,25 +34,27 @@ const Budgets = () => {
         setPreviousBudgets(budgets || []);
       });
 
-      userService.getCurrentMonthData(user?.id).then((data) => {
-        setCurrentMonthSpend(data || []);
-      })
+      const spendData = await userService.getCurrentMonthData(user?.id);
+      setCurrentMonthSpend(spendData || []);
+
+      const budgetData = await userService.getCurrentBudget(user?.id);
+      updateBudget(budgetData || [], spendData || []);
     };
 
     fetchData();
   }, []);
 
   const handleInfoClick = (budget: any) => {
-    let condition = isInfoOpen
+    const condition = isInfoOpen;
 
     if (!condition) {
-      let auxBudget : { category: string; limit: number; spend: number; savings: number }[] = [];
+      const auxBudget: { category: string; limit: number; spend: number; savings: number }[] = [];
       budget.limits.forEach((limit: any) => {
         auxBudget.push({
           category: limit.category_name,
           limit: limit.category_limit,
           spend: limit.category_spend,
-          savings: limit.category_limit - limit.category_spend
+          savings: limit.category_limit - limit.category_spend,
         });
       });
       setPreviousBudget(auxBudget);
@@ -61,20 +63,23 @@ const Budgets = () => {
     }
 
     setIsInfoOpen(!condition);
-  }
+  };
 
-  const updateBudget = (updatedBudget: { category: string; limit: number }[]) => {
+  const updateBudget = (
+    updatedBudget: { category: string; limit: number }[],
+    monthSpend: { category: string; spend: number }[] = currentMonthSpend
+  ) => {
     const auxBudget = updatedBudget.map((item) => {
-        const spendItem = currentMonthSpend.find((s) => s.category === item.category);
-        const spend = spendItem ? spendItem.spend : 0;
-        const savings = item.limit - spend;
+      const spendItem = monthSpend.find((s) => s.category === item.category);
+      const spend = spendItem ? spendItem.spend : 0;
+      const savings = item.limit - spend;
 
-        return {
-            category: item.category,
-            limit: item.limit,
-            spend,
-            savings,
-        };
+      return {
+        category: item.category,
+        limit: item.limit,
+        spend,
+        savings,
+      };
     });
 
     setCurrentBudget(auxBudget);
@@ -82,19 +87,19 @@ const Budgets = () => {
     const totalSpend = auxBudget.reduce((acc, item) => acc + item.spend, 0);
     const totalLimit = auxBudget.reduce((acc, item) => acc + item.limit, 0);
     const totalSavings = totalLimit - totalSpend;
-    
-    let now = new Date();
 
-    let data = {
-        date: `${now.getMonth() + 1}/${now.getFullYear()}`,
-        total_spend: totalSpend,
-        total_limit: totalLimit,
-        total_savings: totalSavings,
-        limits: auxBudget
-    }
-    
+    const now = new Date();
+
+    const data = {
+      date: `${now.getMonth() + 1}/${now.getFullYear()}`,
+      total_spend: totalSpend,
+      total_limit: totalLimit,
+      total_savings: totalSavings,
+      limits: auxBudget,
+    };
+
     userService.storeCurrentBudget(user?.id, data).then(() => {
-        console.log("Presupuesto actualizado en Firestore");
+      console.log("Presupuesto actualizado en Firestore");
     });
 
     setTotalSpend(totalSpend);
@@ -102,32 +107,30 @@ const Budgets = () => {
     setTotalSavings(totalSavings);
   };
 
-
   return (
     <>
       <Header />
       <main className="budgets">
         <section className="current-budget">
           {currentBudget.length > 0 ? (
-                <>
-                    <div className="current-budget__pills">
-                        <Pill value={String(totalLimit)} header="Límite de gasto" fullWidth={false} />
-                        <Pill value={String(totalSpend)} header="Gasto actual" fullWidth={false} />
-                        <Pill value={String(totalSavings)} header="Ahorro potencial" fullWidth={false} />
-                    </div>
-                    <div className="current-budget__table">
-                        <DynamicTable
-                            labels={["Categoría","Límite","Gasto","Ahorro"]}
-                            data={currentBudget}
-                        />
-                    </div>
-                </>
-            ) : (
-                <div className="current-budget__no-budget">
-                    <p>No hay presupuesto actual establecido.</p>
-                </div>
-            )
-          }
+            <>
+              <div className="current-budget__pills">
+                <Pill value={String(totalLimit)} header="Límite de gasto" fullWidth={false} />
+                <Pill value={String(totalSpend)} header="Gasto actual" fullWidth={false} />
+                <Pill value={String(totalSavings)} header="Ahorro potencial" fullWidth={false} />
+              </div>
+              <div className="current-budget__table">
+                <DynamicTable
+                  labels={["Categoría", "Límite", "Gasto", "Ahorro"]}
+                  data={currentBudget}
+                />
+              </div>
+            </>
+          ) : (
+            <div className="current-budget__no-budget">
+              <p>No hay presupuesto actual establecido.</p>
+            </div>
+          )}
           <div className="current-budget__actions">
             <Button
               label="Editar Presupuesto"
@@ -148,7 +151,6 @@ const Budgets = () => {
                 <button className="budget-history__gallery__item__info" onClick={() => handleInfoClick(budget)}>
                   <img src={info} alt={`botón de información sobre presupuesto ${budget.date}`} />
                 </button>
-
               </div>
             ))}
           </div>
@@ -168,14 +170,13 @@ const Budgets = () => {
 
       {isInfoOpen && (
         <div className="modal-overlay">
-            <PreviousBudgetModal
+          <PreviousBudgetModal
             previousBudget={previousBudget}
             onClose={() => setIsInfoOpen(false)}
             updateBudget={updateBudget}
-            />
+          />
         </div>
-     )}
-
+      )}
     </>
   );
 };
