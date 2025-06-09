@@ -6,7 +6,7 @@ type Props = {
   label?: string;
 };
 
-const BackLink = ({ onClick, label = "Back" }: Props) => {
+const BackLink = ({ onClick, label = "Atrás" }: Props) => {
   return (
     <button className="back-link" onClick={onClick}>
       <span className="arrow">←</span>

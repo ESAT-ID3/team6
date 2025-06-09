@@ -9,6 +9,7 @@ import Input from '../components/ui/input/Input';
 import BarChart from '../components/ui/charts/BarChart';
 import PieChart from '../components/ui/charts/PieChart';
 import HorizontalBarChart from '../components/ui/charts/HorizontalBarChart';
+import DynamicTable from '../components/ui/tables/DynamicTable';
 
 const UiKit = () => {
     const { user } = useUser();
@@ -22,6 +23,15 @@ const UiKit = () => {
     const [categories, setCategories] = useState<string[]>([]);
     const [spendData, setSpendData] = useState<number[]>([]);
     const [categoryColors, setCategoryColors] = useState<string[]>([]);
+
+    const [tableLabels, setTableLabels] = useState<string[]>(["Categoría","Límite","Gasto","Ahorro"]);
+    const [tableData, setTableData] = useState<Record<string, any>[]>([
+        { categoria: "Comida", limite: 300, gasto: 250, ahorro: 50 },
+        { categoria: "Transporte", limite: 150, gasto: 100, ahorro: 50 },
+        { categoria: "Ocio", limite: 200, gasto: 180, ahorro: 20 },
+        { categoria: "Suscripciones", limite: 100, gasto: 90, ahorro: 10 },
+        { categoria: "Otros", limite: 250, gasto: 220, ahorro: 30 },
+    ]);
 
     const getRandomColor = (): string => {
         const r = Math.floor(Math.random() * 156) + 100;
@@ -148,6 +158,15 @@ const UiKit = () => {
                                 colors={categoryColors}
                             />
                         </div>
+                    </div>
+                </section>
+                <section>
+                    <h5 className='section-title'>Tables</h5>
+                    <div className='horizontal-gallery'>
+                        <DynamicTable
+                            labels={tableLabels}
+                            data={tableData}
+                        />
                     </div>
                 </section>
             </main>
