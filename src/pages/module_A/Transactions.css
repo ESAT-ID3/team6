@@ -228,3 +228,18 @@
     color: white;
   }
 }
+
+.transactions__layout {
+  display: flex;
+  height: calc(100vh - 80px); /* Ajusta si tu header mide distinto */
+  overflow: hidden;
+}
+
+.transactions__sidebar,
+.transactions__main {
+  overflow-y: auto;
+  height: 100%;
+}
+header {
+  position: sticky;
+}
