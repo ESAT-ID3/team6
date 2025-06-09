@@ -18,8 +18,8 @@ function App() {
       <Route path="/" element={<Landing />} />
       <Route path="/login" element={<Login />} />
       <Route path="/dev" element={<Playground />} />
-      <Route path="/personal/balance" element={<Balance />} />
       <Route path="/user" element={<UserArea />} />
+      <Route path="/personal/balance" element={<Balance />} />
       <Route path="/personal/transactions" element={<Transactions />} />
       <Route path="/personal/stats" element={<Statistics />} />
       <Route path="/personal/budget" element={<Budgets />} />
