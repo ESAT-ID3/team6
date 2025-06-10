@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
 import "./Landing.css"; // Assuming you have a CSS file for styles
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../context/UserContext";
 
 const Landing: React.FC = () => {
-    const { user } = useUser();
     const navigate = useNavigate();
   useEffect(() => {
     const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
