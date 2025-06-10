@@ -29,9 +29,6 @@ function Navbar() {
         )}
         {isLoggedIn && (
           <>
-            <div className="nav-item"> 
-              <Link to="/" className='nav-link'>Home</Link>
-            </div>
             {canSeePersonal && (
               <div className="nav-item dropdown">
                 <span className="nav-link">Finanzas personales ▼</span>
@@ -73,7 +70,6 @@ function Navbar() {
             )}
             {isLoggedIn && (
               <>
-                <Link to="/" className='nav-link'>Home</Link>
                 <Link to="/user" className='nav-link'>Mi Perfil</Link>
                 {canSeePersonal && (
                   <AccordionItem title="Finanzas personales">
