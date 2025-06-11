@@ -68,6 +68,11 @@
     text-align: center;
 }
 
+.sign-up-link {
+    color: var(--main-blue);
+    text-decoration: none;
+}
+
 @media (width < 1240px) {
     .main-container {
         padding: 50px 20px;

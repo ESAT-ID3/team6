@@ -2,6 +2,7 @@ import './Input.css'
 import { useState } from 'react';
 
 type InputProps = {
+    value?: string;
     headline?: string;
     footer?: string;
     beginningIcon?: string;
@@ -13,15 +14,12 @@ type InputProps = {
 }
 
 const Input = (props: InputProps) => {
-    const { headline, footer, beginningIcon, endingIcon, alternativeEndingIcon, isPassword, placeholder, onChange } = props;
-    
-    const [usedIcon, setUsedIcon] = useState(endingIcon);
+    const {value, headline, footer, beginningIcon, endingIcon, alternativeEndingIcon, isPassword, placeholder, onChange } = props;
     const [isVisible, setIsVisible] = useState(false);
 
     const handleVisibilityToggle = () => {
         if (!isPassword) return;
         setIsVisible(!isVisible);
-        setUsedIcon(!isVisible ? alternativeEndingIcon : endingIcon);
     }
 
     return (
@@ -42,10 +40,15 @@ const Input = (props: InputProps) => {
                     type={isPassword ? (isVisible ? "text" : "password") : "text"}
                     placeholder={placeholder}
                     onChange={onChange}
+                    value={value ? value : ""}
                 />
-                {usedIcon && (
-                    <div className="input-icon" onClick={handleVisibilityToggle} style={{ cursor: isPassword ? 'pointer' : 'default' }}>
-                        <img src={isPassword ? usedIcon : endingIcon} alt="end icon" />
+                {isPassword && endingIcon && alternativeEndingIcon && (
+                    <div
+                        className="input-icon"
+                        onClick={handleVisibilityToggle}
+                        style={{ cursor: 'pointer' }}
+                    >
+                        <img src={isVisible ? alternativeEndingIcon : endingIcon} alt="toggle visibility" />
                     </div>
                 )}
             </div>

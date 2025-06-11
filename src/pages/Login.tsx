@@ -41,6 +41,8 @@ const Login = () => {
             });
             if (data.role === 'admin' || data.role === 'dev') {
                 navigate("/dev");
+            } else {
+                navigate('/user')
             }
         } else {
             setDataError(true);
@@ -74,6 +76,7 @@ const Login = () => {
                             isPassword={true}
                             onChange={handlePasswordChange}
                         />
+                        <p>¿No tienes una cuenta? <a className='sign-up-link' href="/register">Regístrate</a></p>
                         <Button
                             variant="secondary"
                             label="Iniciar sesión"
