@@ -74,6 +74,7 @@ const Login = () => {
                             isPassword={true}
                             onChange={handlePasswordChange}
                         />
+                        <p>¿No tienes una cuenta? <a className='sign-up-link' href="/register">Regístrate</a></p>
                         <Button
                             variant="secondary"
                             label="Iniciar sesión"
