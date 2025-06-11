@@ -8,6 +8,7 @@ interface ButtonProps {
   variant: 'primary' | 'secondary';
   isActive?: boolean;
   isFullWidth?: boolean;
+  buttonType?: "submit" | "reset" | "button" | undefined;
 }
 
 const Button = (props: ButtonProps) => {
@@ -19,6 +20,7 @@ const Button = (props: ButtonProps) => {
     variant,
     isActive = false,
     isFullWidth = undefined,
+    buttonType = undefined
   } = props;
 
   let className = isFilter
@@ -37,11 +39,16 @@ const Button = (props: ButtonProps) => {
     }
   };
 
-  return (
+  return buttonType ? (
+    <button onClick={handleClick} disabled={isDisabled} className={className} type={buttonType}>
+      {label}
+    </button>
+  ) : (
     <button onClick={handleClick} disabled={isDisabled} className={className}>
       {label}
     </button>
   );
+
 };
 
 export default Button;

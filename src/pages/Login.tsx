@@ -41,6 +41,8 @@ const Login = () => {
             });
             if (data.role === 'admin' || data.role === 'dev') {
                 navigate("/dev");
+            } else {
+                navigate('/user')
             }
         } else {
             setDataError(true);
