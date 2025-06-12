@@ -65,6 +65,7 @@ const Login = () => {
                             beginningIcon={user_icon}
                             isPassword={false}
                             onChange={handleEmailChange}
+                            value={email}
                         />
                         <Input
                             placeholder="Introduzca su contraseña"
@@ -75,6 +76,7 @@ const Login = () => {
                             alternativeEndingIcon={visible_icon}
                             isPassword={true}
                             onChange={handlePasswordChange}
+                            value={password}
                         />
                         <p>¿No tienes una cuenta? <a className='sign-up-link' href="/register">Regístrate</a></p>
                         <Button
