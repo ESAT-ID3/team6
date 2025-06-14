@@ -1,0 +1,16 @@
+.statistics-preview {
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.chart-wrapper {
+  max-width: 500px;
+  height: 300px;
+  margin: 0 auto;
+}
+
+.button-container {
+  margin-top: 1rem;
+  text-align: center;
+}
