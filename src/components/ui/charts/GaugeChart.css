@@ -1,0 +1,13 @@
+.gauge-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 130px;
+}
+
+.gauge-label {
+  margin-top: 10px;
+  font-weight: 600;
+  text-align: center;
+  font-size: 0.9rem;
+}
