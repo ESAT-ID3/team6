@@ -1,0 +1,107 @@
+.balance-container {
+  height: calc(100vh - 60px);
+}
+
+.balance-grid {
+  display: flex;
+  height: 100%;
+}
+
+/* Desktop */
+.balance-left {
+  width: 35%;
+  background: var(--light-purple-bg);
+  padding: 30px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.balance-right {
+  width: 65%;
+  background: var(--white);
+  padding: 30px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.total-balance-card {
+  background: var(--main-gradient);
+  padding: 20px 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.total-balance-card p {
+  font-size: var(--font-p);
+  font-weight: 300;
+  margin: 0;
+  color: var(--white);
+}
+
+.total-balance-card h1 {
+  font-size: var(--font-h1);
+  font-weight: 300;
+  color: var(--white);
+}
+
+.transactions-section h2,
+.budget-section h2 {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.statistics-section h2 {
+  display: none;
+}
+
+.transactions-section .transaction-card {
+  height: 90px;
+  font-size: 0.95rem;
+}
+
+.mobile-buttons {
+  display: none;
+}
+
+/* TABLET RESPONSIVE */
+
+@media (max-width: 992px) {
+  .balance-grid {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .balance-left,
+  .balance-right {
+    width: 100%;
+    background: var(--white);
+    padding: 20px;
+    overflow-y: unset;
+  }
+
+  .total-balance-card {
+    margin-top: 20px;
+  }
+
+  .mobile-buttons {
+    display: none;
+  }
+}
+
+/* MOBILE RESPONSIVE */
+
+@media (max-width: 576px) {
+  .statistics-section,
+  .budget-section {
+    display: none;
+  }
+
+  .mobile-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+    align-items: center;
+  }
+}

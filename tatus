@@ -1,0 +1,47 @@
+* [33m61460ba[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeatures/news[m[33m)[m Se maquetado FinanceNews
+*   [33m720265b[m Merge pull request #19 from ESAT-ID3/fix/features/transaction_data_filtering
+[32m|[m[33m\[m  
+[32m|[m * [33m3e4dc13[m[33m ([m[1;31morigin/fix/features/transaction_data_filtering[m[33m, [m[1;32mfix/features/transaction_data_filtering[m[33m)[m Fix: corrección de filtros Banck Category y Datepicker
+[32m|[m[32m/[m  
+*   [33m24cd1e0[m Merge pull request #18 from ESAT-ID3/features/transaction_data_filtering
+[34m|[m[35m\[m  
+[34m|[m *   [33m1eaef86[m[33m ([m[1;31morigin/features/transaction_data_filtering[m[33m, [m[1;32mfeatures/transaction_data_filtering[m[33m)[m Resuelto conflicto en Datepicker.tsx
+[34m|[m [36m|[m[34m\[m  
+[34m|[m [36m|[m[34m/[m  
+[34m|[m[34m/[m[36m|[m   
+* [36m|[m [33mb00d49b[m Update Datepicker.tsx
+[1;31m|[m * [33m7e39ac8[m Añadidos filtros tarea transactions 2
+[1;31m|[m[1;31m/[m  
+* [33mfdf56a6[m Transaction integration
+*   [33mc6074f2[m Merge pull request #17 from ESAT-ID3/features/transaction_data_visualization
+[1;32m|[m[1;33m\[m  
+[1;32m|[m *   [33mce0eef1[m[33m ([m[1;31morigin/features/transaction_data_visualization[m[33m)[m feat: finaliza tarea transacciones1
+[1;32m|[m [1;34m|[m[1;32m\[m  
+[1;32m|[m [1;34m|[m[1;32m/[m  
+[1;32m|[m[1;32m/[m[1;34m|[m   
+* [1;34m|[m   [33m02dd651[m Merge pull request #16 from ESAT-ID3/feature/stats_page_moduleA
+[1;36m|[m[31m\[m [1;34m\[m  
+[1;36m|[m * [1;34m|[m [33medef97a[m[33m ([m[1;31morigin/feature/stats_page_moduleA[m[33m)[m Interactive bar chart added
+[1;36m|[m * [1;34m|[m [33mbe79eff[m Statistics basic functionality completed
+[1;36m|[m * [1;34m|[m [33ma750f3c[m started the stats page
+[1;36m|[m * [1;34m|[m [33m681cc1f[m PieChart added
+[1;36m|[m * [1;34m|[m [33m77e1389[m BarChart added
+[1;36m|[m[1;36m/[m [1;34m/[m  
+[1;36m|[m * [33m42703ff[m feat: maquetación tarea transacciones 1
+[1;36m|[m[1;36m/[m  
+*   [33mf29fcdb[m Merge pull request #15 from ESAT-ID3/feature/login
+[32m|[m[33m\[m  
+[32m|[m * [33m9933b86[m[33m ([m[1;31morigin/feature/login[m[33m)[m login completed
+[32m|[m[32m/[m  
+*   [33md7244db[m Merge pull request #14 from ESAT-ID3/feature/user_data_models
+[34m|[m[35m\[m  
+[34m|[m * [33m99f4f29[m[33m ([m[1;31morigin/feature/user_data_models[m[33m)[m Refactoring + Services
+[34m|[m * [33m25db1e6[m Repo structure + Navigation
+[34m|[m[34m/[m  
+* [33m27934cf[m feature/datepicker
+* [33me61d0f0[m UiKit initialized
+* [33m49537f0[m Initial commit
+* [33m847d1b6[m Create branch-rules.yml
+* [33mc38a191[m Update README.md
+* [33mf10afd2[m Update README.md
+* [33mfed1ec0[m Initial commit
