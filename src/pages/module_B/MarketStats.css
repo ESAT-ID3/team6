@@ -136,8 +136,7 @@
 /* Para el botón de actualizar */
 .ms-info-container__header > button {
   display: flex;
-  align-self: center
-  
+  align-self: flex-end;
 }
 
 

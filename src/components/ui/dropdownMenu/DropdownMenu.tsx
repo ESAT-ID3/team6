@@ -5,7 +5,7 @@ type DropdownMenuProps = {
   label: string;
   options: string[];
   onSelect: (value: string) => void;
-  selected?: string;
+  selected?: string; // opcional
 };
 
 const DropdownMenu: React.FC<DropdownMenuProps> = ({
@@ -15,16 +15,17 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
   selected: controlledSelected,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  // Estado interno para el valor seleccionado
-  const [selected, setSelected] = useState<string | undefined>(controlledSelected);
+  const [internalSelected, setInternalSelected] = useState<string | undefined>(controlledSelected);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Sincronizar si el padre cambia el selected
+  // Sincroniza con el valor del padre si está presente
   useEffect(() => {
-    setSelected(controlledSelected);
+    if (controlledSelected !== undefined) {
+      setInternalSelected(controlledSelected);
+    }
   }, [controlledSelected]);
 
-  // Cerrar dropdown al clicar fuera
+  // Cerrar el dropdown si se clickea fuera
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
@@ -39,10 +40,14 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
   }, []);
 
   const handleOptionClick = (option: string) => {
-    setSelected(option);       // Actualizo internamente
-    onSelect(option);          // Notifico al padre
+    if (controlledSelected === undefined) {
+      setInternalSelected(option); // solo actualiza si es no controlado
+    }
+    onSelect(option);
     setIsOpen(false);
   };
+
+  const selectedToShow = controlledSelected !== undefined ? controlledSelected : internalSelected;
 
   return (
     <div className="dm-container" ref={containerRef}>
@@ -53,7 +58,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
         aria-haspopup="listbox"
         aria-expanded={isOpen}
       >
-        {selected || label}
+        {selectedToShow || label}
         <span className={`dm-arrow ${isOpen ? "open" : ""}`} />
       </button>
       {isOpen && (
@@ -62,11 +67,11 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
             <li
               key={option}
               className={`dm-option ${
-                selected === option ? "selected" : ""
+                selectedToShow === option ? "selected" : ""
               }`}
               onClick={() => handleOptionClick(option)}
               role="option"
-              aria-selected={selected === option}
+              aria-selected={selectedToShow === option}
               tabIndex={0}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {

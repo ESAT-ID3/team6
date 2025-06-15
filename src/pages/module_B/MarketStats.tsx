@@ -28,6 +28,7 @@ const MarketStats = () => {
     const [selectedFilter, setSelectedFilter] = useState<string>("Todos")
     const [assetList, setAssetList] = useState<{name: string, type:string}[]>([]);
 
+    const [assetName, setAssetName] = useState<string>("")
     const [selectedAsset, setSelectedAsset] = useState<any>(null)
     const [selectedType, setSelectedType] = useState<any>(null)
 
@@ -83,6 +84,7 @@ const MarketStats = () => {
         setRequestType("") 
         setSelectedSymbol("") 
         setSelectedExchange("") 
+        setSelectedExchangeCategory("") 
         setStartDate("") 
         setEndDate("")
         
@@ -94,6 +96,7 @@ const MarketStats = () => {
 
         let data = await assetService.getFirebaseData(assetType[type as keyof typeof assetType])
         if (data) {
+            setAssetName(name)
             let asset = data[name as keyof typeof assetType]
             console.log(asset)
             setSelectedAsset(asset)
@@ -216,10 +219,12 @@ const MarketStats = () => {
                 <>
                     <div className='ms-info-container__header'>
                         <div className='ms-info-container__header__parameters'>
+                            <h4>Visualizando: {assetName}</h4>
                             <div className='ms-info-container__parameters__dd'>
                                 <DropdownMenu
                                     label="Seleccione un intervalo"
                                     options={intervalList}
+                                    selected={selectedInterval}
                                     onSelect={(value) => setSelectedInterval(value)}
                                 />
                                 {selectedType === 'Divisas' &&
@@ -238,13 +243,15 @@ const MarketStats = () => {
                                         label = {selectedExchangeCategory ? "Seleccione una divisa" : "Seleccione un mercado"}
                                         options={exchange}
                                         onSelect={(value) => {
+                                            console.log(value)
                                             setSelectedExchange(value)
                                             if (selectedType === 'Acciones') {
                                                 let index = selectedAsset.exchanges.indexOf(value)
                                                 setSelectedSymbol(selectedAsset.symbols[index])
                                             } else {
-                                                let index = selectedAsset.exchange_names.indexOf(value)
-                                                setSelectedSymbol(selectedAsset.exchange_symbols[index])
+                                                let index = selectedAsset[selectedExchangeCategory].exchange_names.indexOf(value)
+                                                let symbol = selectedAsset[selectedExchangeCategory].exchange_symbols[index]
+                                                setSelectedSymbol(symbol)
                                             }
                                         }}
                                     />
