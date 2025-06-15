@@ -12,6 +12,8 @@ import MyPortfolio from "./pages/module_B/MyPortfolio";
 import MarketStats from "./pages/module_B/MarketStats";
 import FinanceNews from "./pages/module_B/FinanceNews";
 import WikiFinance from "./pages/module_B/WikiFinance";
+import LegalNotice from "./components/ui/legalNotice/LegalNotice";
+import PrivacyPolicy from "./components/ui/privacyPolicy/PrivacyPolicy";
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
       <Route path="/finance/market" element={<MarketStats />} />
       <Route path="/finance/news" element={<FinanceNews />} />
       <Route path="/finance/wiki" element={<WikiFinance />} />
+      <Route path="/legalnotice" element={<LegalNotice />} />
+      <Route path="/privacypolicy" element={<PrivacyPolicy />} />
     </Routes>
   );
 }

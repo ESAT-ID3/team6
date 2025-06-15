@@ -9,6 +9,7 @@ import DynamicTable from "../../components/ui/tables/DynamicTable";
 import Button from "../../components/ui/button/Button";
 import BudgetEditionModal from "../../components/ui/budgetEditionModal/BudgetEditionModal";
 import PreviousBudgetModal from "../../components/ui/previousBudgetModal/PreviousBudgetModal";
+import Footer from "../../components/layout/footer/Footer";
 
 const Budgets = () => {
   const { user } = useUser();
@@ -18,12 +19,18 @@ const Budgets = () => {
 
   const [spendCategories, setSpendCategories] = useState<string[]>([]);
   const [previousBudgets, setPreviousBudgets] = useState<any[]>([]);
-  const [currentBudget, setCurrentBudget] = useState<{ category: string; limit: number; spend: number; savings: number }[]>([]);
-  const [previousBudget, setPreviousBudget] = useState<{ category: string; limit: number; spend: number; savings: number }[]>([]);
+  const [currentBudget, setCurrentBudget] = useState<
+    { category: string; limit: number; spend: number; savings: number }[]
+  >([]);
+  const [previousBudget, setPreviousBudget] = useState<
+    { category: string; limit: number; spend: number; savings: number }[]
+  >([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isInfoOpen, setIsInfoOpen] = useState(false);
 
-  const [currentMonthSpend, setCurrentMonthSpend] = useState<{ category: string; spend: number }[]>([]);
+  const [currentMonthSpend, setCurrentMonthSpend] = useState<
+    { category: string; spend: number }[]
+  >([]);
   const labels = ["Categoría", "Límite", "Gasto", "Ahorro"];
   useEffect(() => {
     const fetchData = async () => {
@@ -43,7 +50,6 @@ const Budgets = () => {
 
       console.log("Presupuesto actual:", budgetData);
       console.log("Gastos del mes actual:", spendData);
-      
     };
 
     fetchData();
@@ -53,7 +59,12 @@ const Budgets = () => {
     const condition = isInfoOpen;
 
     if (!condition) {
-      const auxBudget: { category: string; limit: number; spend: number; savings: number }[] = [];
+      const auxBudget: {
+        category: string;
+        limit: number;
+        spend: number;
+        savings: number;
+      }[] = [];
       budget.limits.forEach((limit: any) => {
         auxBudget.push({
           category: limit.category_name,
@@ -120,15 +131,24 @@ const Budgets = () => {
           {currentBudget.length > 0 ? (
             <>
               <div className="current-budget__pills">
-                <Pill value={String(totalLimit)} header="Límite de gasto" fullWidth={false} />
-                <Pill value={String(totalSpend)} header="Gasto actual" fullWidth={false} />
-                <Pill value={String(totalSavings)} header="Ahorro potencial" fullWidth={false} />
+                <Pill
+                  value={String(totalLimit)}
+                  header="Límite de gasto"
+                  fullWidth={false}
+                />
+                <Pill
+                  value={String(totalSpend)}
+                  header="Gasto actual"
+                  fullWidth={false}
+                />
+                <Pill
+                  value={String(totalSavings)}
+                  header="Ahorro potencial"
+                  fullWidth={false}
+                />
               </div>
               <div className="current-budget__table">
-                <DynamicTable
-                  labels={labels}
-                  data={currentBudget}
-                />
+                <DynamicTable labels={labels} data={currentBudget} />
               </div>
             </>
           ) : (
@@ -152,9 +172,17 @@ const Budgets = () => {
             {previousBudgets.map((budget, idx) => (
               <div key={idx} className="budget-history__gallery__item">
                 <p>{budget.date}</p>
-                <p>{budget.total_spend} / {budget.total_limit} €</p>
-                <button className="budget-history__gallery__item__info" onClick={() => handleInfoClick(budget)}>
-                  <img src={info} alt={`botón de información sobre presupuesto ${budget.date}`} />
+                <p>
+                  {budget.total_spend} / {budget.total_limit} €
+                </p>
+                <button
+                  className="budget-history__gallery__item__info"
+                  onClick={() => handleInfoClick(budget)}
+                >
+                  <img
+                    src={info}
+                    alt={`botón de información sobre presupuesto ${budget.date}`}
+                  />
                 </button>
               </div>
             ))}
@@ -182,6 +210,7 @@ const Budgets = () => {
           />
         </div>
       )}
+      <Footer />
     </>
   );
 };

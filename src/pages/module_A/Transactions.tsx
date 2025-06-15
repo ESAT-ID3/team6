@@ -4,6 +4,7 @@ import { useUser } from "../../context/UserContext";
 import userService from "../../services/firebase/userService";
 import Button from "../../components/ui/button/Button";
 import Header from "../../components/layout/header/Header";
+import Footer from "../../components/layout/footer/Footer";
 import TransactionCard from "../../components/ui/transactionCard/TransactionCard";
 import BankFilter from "../../components/ui/bankFilter/BankFilter";
 import CategoryFilter from "../../components/ui/categoryFilter/CategoryFilter";
@@ -306,6 +307,7 @@ const Transactions = () => {
           </div>
         </main>
       </div>
+      <Footer />
     </>
   );
 };

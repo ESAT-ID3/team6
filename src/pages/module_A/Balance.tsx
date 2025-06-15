@@ -8,6 +8,7 @@ import { useUser } from "../../context/UserContext";
 import "./Balance.css";
 import Button from "../../components/ui/button/Button";
 import { useNavigate } from "react-router-dom";
+import Footer from "../../components/layout/footer/Footer";
 
 interface CategoryStatus {
   category: string;
@@ -94,6 +95,7 @@ const Balance = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
