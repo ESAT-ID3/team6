@@ -39,7 +39,7 @@ const StatisticsPreview = () => {
           labels={labels}
           incomeData={incomeData}
           outcomeData={outcomeData}
-          selectedLabel={null}
+          selectedLabel={undefined}
           onBarClick={() => {}}
         />
       </div>
