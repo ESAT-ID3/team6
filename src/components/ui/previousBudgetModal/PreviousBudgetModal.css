@@ -7,12 +7,26 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
+/* Título del modal */
 .budget-info-modal__title {
   margin-bottom: 12px;
 }
 
+/* Área de acciones (botones) */
 .budget-info-modal__actions {
   display: flex;
   justify-content: flex-end;
   margin-top: 12px;
+}
+
+/* Reducir tamaño de fuente en tablas dentro del modal para móviles */
+@media (max-width: 768px) {
+  .budget-info-modal table {
+    font-size: 0.85rem;
+  }
+
+  .budget-info-modal table th,
+  .budget-info-modal table td {
+    padding: 6px 8px;
+  }
 }
