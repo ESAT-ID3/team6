@@ -213,14 +213,17 @@ body.loaded {
 }
 
 .login-btn {
+  display: flex;
+  align-items: center;
   background: none;
   border: 1px solid var(--border);
-  color: var(--text-secondary);
+  color: var(--main-purple);
   padding: var(--spacing-sm) var(--spacing-base);
   border-radius: var(--radius-base);
   font-weight: 500;
   cursor: pointer;
   transition: all var(--transition-fast);
+  font-family: var(--main-font);
 }
 
 .login-btn:hover {
@@ -1477,6 +1480,25 @@ body.loaded {
 }
 
 @media (max-width: 480px) {
+  .navbar {
+    padding: 0;
+  }
+
+  .nav-menu, .cta-btn {
+    display: none;
+  }
+
+  .login-btn {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1.25rem; /* más espacio horizontal */
+    font-size: 1rem; /* un poco más grande para que no se vea chiquito */
+    white-space: nowrap; /* evita que el texto haga salto de línea */
+    width: fit-content;
+    font-family: var(--main-font);
+    color: var(--main-purple)
+  }
+
   .download-options {
     gap: var(--spacing-base);
   }

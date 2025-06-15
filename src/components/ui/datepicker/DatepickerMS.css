@@ -1,0 +1,29 @@
+.dp-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: var(--font-main);
+  font-size: var(--font-p);
+  color: var(--main-blue);
+  width: 220px;
+}
+
+.dp-label {
+  font-weight: 500;
+}
+
+.dp-input {
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: var(--font-p);
+  font-family: var(--font-main);
+  background-color: #fff;
+  color: var(--main-blue);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.dp-input:focus {
+  border-color: var(--main-purple);
+}
