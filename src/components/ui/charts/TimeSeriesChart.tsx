@@ -40,6 +40,10 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({ labels, high, low, op
         borderColor: 'rgba(75, 192, 192, 1)',
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         tension: 0.3,
+        borderWidth: 1,       // Línea fina
+        pointRadius: 4,       // Punto visible en cada valor
+        pointHoverRadius: 6,
+        fill: false,
       },
       {
         label: 'Low',
@@ -47,6 +51,10 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({ labels, high, low, op
         borderColor: 'rgba(255, 99, 132, 1)',
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         tension: 0.3,
+        borderWidth: 1,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        fill: false,
       },
       {
         label: 'Open',
@@ -54,6 +62,10 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({ labels, high, low, op
         borderColor: 'rgba(255, 206, 86, 1)',
         backgroundColor: 'rgba(255, 206, 86, 0.2)',
         tension: 0.3,
+        borderWidth: 1,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        fill: false,
       },
       {
         label: 'Close',
@@ -61,6 +73,10 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({ labels, high, low, op
         borderColor: 'rgba(153, 102, 255, 1)',
         backgroundColor: 'rgba(153, 102, 255, 0.2)',
         tension: 0.3,
+        borderWidth: 1,
+        pointRadius: 4,
+        pointHoverRadius: 6,
+        fill: false,
       },
     ],
   };
@@ -69,64 +85,66 @@ const TimeSeriesChart: React.FC<TimeSeriesChartProps> = ({ labels, high, low, op
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
-        legend: {
+      legend: {
         position: 'top' as const,
         labels: {
-            font: {
+          font: {
             family: 'Sora',
-            },
+          },
         },
-        },
-        tooltip: {
+      },
+      tooltip: {
         mode: 'index' as const,
         intersect: false,
         titleFont: {
-            family: 'Sora',
+          family: 'Sora',
         },
         bodyFont: {
-            family: 'Sora',
+          family: 'Sora',
         },
-        },
+      },
+      datalabels: {
+        display: false,  // Aquí quitamos cualquier etiqueta sobre los puntos
+      },
     },
     interaction: {
-        mode: 'nearest' as const,
-        axis: 'x' as const,
-        intersect: false,
+      mode: 'nearest' as const,
+      axis: 'x' as const,
+      intersect: false,
     },
     scales: {
-        x: {
+      x: {
         display: true,
         title: {
-            display: true,
-            text: 'Time',
-            font: {
+          display: true,
+          text: 'Time',
+          font: {
             family: 'Sora',
-            },
+          },
         },
         ticks: {
-            font: {
+          font: {
             family: 'Sora',
-            },
+          },
         },
-        },
-        y: {
+      },
+      y: {
         display: true,
         title: {
-            display: true,
-            text: 'Price',
-            font: {
+          display: true,
+          text: 'Price',
+          font: {
             family: 'Sora',
-            },
+          },
         },
         ticks: {
-            font: {
+          font: {
             family: 'Sora',
-            },
+          },
         },
-        },
+      },
     },
-    };
-
+  };
 
   return (
     <div style={{ height: '400px', width: '100%' }}>

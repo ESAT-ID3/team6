@@ -62,6 +62,12 @@
   scrollbar-color: #7c4dff rgba(255, 255, 255, 0.1);
 }
 
+#asset-list h4 {
+  align-self: center;
+  color: var(--white);
+  padding: 6px;
+}
+
 .ms-asset-list::-webkit-scrollbar {
   width: 8px;
 }
@@ -102,6 +108,18 @@
   width: 100%;
 }
 
+/* Contenedor de la gráfica con fondo blanco semitransparente */
+.ms-info-container__chart {
+  display: flex;
+  height: 70%;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  padding: 16px;
+}
+
 .ms-info-container__header {
   display: flex;
   justify-content: space-between; /* botón a la derecha, parámetros a la izquierda */
@@ -139,12 +157,78 @@
   align-self: flex-end;
 }
 
+/* Wrapper para botón "Volver arriba" - oculto por defecto */
+.volver-arriba-wrapper {
+  display: none;
+  margin-bottom: 10px;
+}
 
+@media (max-width: 768px) {
+  .ms-page-container {
+    height: auto;
+    overflow: visible;
+  }
 
-.ms-info-container__chart {
-  display: flex;
-  height: 70%;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+  .ms-page-content {
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+  }
+
+  .ms-page-content aside,
+  .ms-page-content main {
+    width: 100%;
+    max-height: none;
+    overflow: visible;
+    height: auto;
+  }
+
+  /* Tus estilos responsivos existentes, sin tocar */
+
+  .ms-info-container {
+    height: auto;
+    padding: 16px;
+    gap: 64px;
+  }
+
+  .ms-info-container__header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+  }
+
+  .ms-info-container__parameters__dd,
+  .ms-info-container__parameters__dp {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .ms-info-container__header > button {
+    align-self: flex-end;
+  }
+
+  .ms-info-container__chart {
+    height: auto;
+    min-height: 300px;
+  }
+
+  .ms-asset-list {
+    padding: 16px;
+  }
+
+  .ms-asset-list__item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .ms-asset-list__item button {
+    width: 100%;
+  }
+
+  /* Mostrar botón "Volver arriba" sólo en móvil */
+  .volver-arriba-wrapper {
+    display: block;
+  }
 }
