@@ -1,0 +1,234 @@
+.ms-page-container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 64px);
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: sans-serif;
+}
+
+.ms-page-content {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.ms-page-content aside {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  background: linear-gradient(
+    to bottom,
+    rgba(63, 25, 153, 0.5) 75%,
+    rgba(105, 42, 255, 0.5) 100%
+  );
+}
+
+.ms-page-content main {
+  width: 60%;
+  overflow: auto;
+  background: linear-gradient(
+    to bottom,
+    rgba(63, 25, 153, 0.15) 85%,
+    rgba(177, 145, 255, 0.15) 100%
+  );
+}
+
+.ms-asset-filters {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 12px;
+  gap: 12px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.ms-asset-list {
+  flex: 1;
+  min-height: 0;
+  max-height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 48px;
+  gap: 12px;
+  scrollbar-width: thin;
+  scrollbar-color: #7c4dff rgba(255, 255, 255, 0.1);
+}
+
+#asset-list h4 {
+  align-self: center;
+  color: var(--white);
+  padding: 6px;
+}
+
+.ms-asset-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ms-asset-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.ms-asset-list::-webkit-scrollbar-thumb {
+  background-color: #7c4dff;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.ms-asset-list::-webkit-scrollbar-thumb:hover {
+  background-color: #9b6aff;
+}
+
+.ms-asset-list__item {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--white);
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.ms-info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 64px);
+  width: 100%;
+}
+
+/* Contenedor de la gráfica con fondo blanco semitransparente */
+.ms-info-container__chart {
+  display: flex;
+  height: 70%;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.ms-info-container__header {
+  display: flex;
+  justify-content: space-between; /* botón a la derecha, parámetros a la izquierda */
+  align-items: flex-start; /* para que el botón quede alineado al inicio verticalmente */
+  width: 100%;
+  gap: 20px; /* espacio entre los dos bloques */
+}
+
+.ms-info-container__header__parameters {
+  display: flex;
+  flex-direction: column; /* apilamos verticalmente los dos bloques de parámetros */
+  gap: 16px;
+  flex-grow: 1; /* para que ocupe el máximo ancho posible */
+}
+
+/* Para los dropdowns (primer fila), todos en fila horizontal */
+.ms-info-container__parameters__dd {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Para los datepickers (segunda fila), también en fila horizontal */
+.ms-info-container__parameters__dp {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Para el botón de actualizar */
+.ms-info-container__header > button {
+  display: flex;
+  align-self: flex-end;
+}
+
+/* Wrapper para botón "Volver arriba" - oculto por defecto */
+.volver-arriba-wrapper {
+  display: none;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .ms-page-container {
+    height: auto;
+    overflow: visible;
+  }
+
+  .ms-page-content {
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+  }
+
+  .ms-page-content aside,
+  .ms-page-content main {
+    width: 100%;
+    max-height: none;
+    overflow: visible;
+    height: auto;
+  }
+
+  /* Tus estilos responsivos existentes, sin tocar */
+
+  .ms-info-container {
+    height: auto;
+    padding: 16px;
+    gap: 64px;
+  }
+
+  .ms-info-container__header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+  }
+
+  .ms-info-container__parameters__dd,
+  .ms-info-container__parameters__dp {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .ms-info-container__header > button {
+    align-self: flex-end;
+  }
+
+  .ms-info-container__chart {
+    height: auto;
+    min-height: 300px;
+  }
+
+  .ms-asset-list {
+    padding: 16px;
+  }
+
+  .ms-asset-list__item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .ms-asset-list__item button {
+    width: 100%;
+  }
+
+  /* Mostrar botón "Volver arriba" sólo en móvil */
+  .volver-arriba-wrapper {
+    display: block;
+  }
+}

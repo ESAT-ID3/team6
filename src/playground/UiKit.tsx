@@ -5,10 +5,13 @@ import userService from '../services/firebase/userService';
 import Header from "../components/layout/header/Header";
 import Button from "../components/ui/button/Button";
 import Datepicker from '../components/ui/datepicker/Datepicker';
+import DatepickerMS from '../components/ui/datepicker/DatepickerMS';
 import Input from '../components/ui/input/Input';
+import DropdownMenu from '../components/ui/dropdownMenu/DropdownMenu';
 import BarChart from '../components/ui/charts/BarChart';
 import PieChart from '../components/ui/charts/PieChart';
 import HorizontalBarChart from '../components/ui/charts/HorizontalBarChart';
+import TimeSeriesChart from '../components/ui/charts/TimeSeriesChart';
 import DynamicTable from '../components/ui/tables/DynamicTable';
 
 const UiKit = () => {
@@ -132,6 +135,16 @@ const UiKit = () => {
                             isPassword={false}
                             onChange={() => { }}
                         />
+                        <DropdownMenu
+                            label="Selecciona una opción"
+                            options={["Acciones", "Criptomonedas", "ETFs", "Divisas"]}
+                            onSelect={(value) => console.log("Seleccionado:", value)}
+                        />
+                        <DatepickerMS
+                            label="Fecha múltiple"
+                            value=""
+                            onChange={(newDate) => console.log("Nueva fecha:", newDate)}
+                        />
                     </div>
                 </section>
                 <section>
@@ -156,6 +169,15 @@ const UiKit = () => {
                                 categories={categories}
                                 expenses={spendData}
                                 colors={categoryColors}
+                            />
+                        </div>
+                        <div className='chart-container'>
+                            <TimeSeriesChart
+                                labels={['2025-06-10', '2025-06-11', '2025-06-12']}
+                                high={[105, 110, 108]}
+                                low={[98, 102, 100]}
+                                open={[100, 106, 105]}
+                                close={[104, 108, 103]}
                             />
                         </div>
                     </div>
