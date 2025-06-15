@@ -118,3 +118,39 @@
   background-color: rgba(63, 25, 153, 0.4);
   border-radius: 3px;
 }
+
+
+@media (max-width: 768px) {
+  .budgets {
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+  }
+
+  .current-budget,
+  .budget-history {
+    flex: unset;
+    width: 100%;
+    height: auto;
+    padding: 12px;
+  }
+
+  .current-budget__table {
+    max-height: none;
+  }
+
+  .current-budget__table table {
+    font-size: 0.85rem;
+  }
+
+  .current-budget__table th,
+  .current-budget__table td {
+    padding: 6px 8px;
+  }
+
+  .budget-history__gallery__item__info img {
+    width: 20px;
+    height: 20px;
+  }
+}
+

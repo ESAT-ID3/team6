@@ -21,11 +21,10 @@ const StatisticsPreview = () => {
       const banks_info = userData?.bank_accounts;
 
       if (banks_info) {
-        const { labels, incomeData, outcomeData } =
-          userService.getInfoPerMonth(banks_info);
-        setLabels(labels.slice(-6).reverse());
-        setIncomeData(incomeData.slice(-6).reverse());
-        setOutcomeData(outcomeData.slice(-6).reverse());
+        const { labels, incomeData, outcomeData } = userService.getInfoPerMonth(banks_info);
+        setLabels(labels.reverse().slice(-6));
+        setIncomeData(incomeData.reverse().slice(-6));
+        setOutcomeData(outcomeData.reverse().slice(-6));
       }
     };
 
