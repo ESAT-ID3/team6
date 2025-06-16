@@ -183,7 +183,7 @@ const Transactions = () => {
             <div className="transactions__mobile-controls ">
               <input
                 type="text"
-                placeholder="Search..."
+                placeholder="Buscar..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className="transactions__search"

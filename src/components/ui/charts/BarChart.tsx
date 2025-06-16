@@ -78,7 +78,7 @@ const BarChart: React.FC<BarChartProps> = ({
       },
       title: {
         display: true,
-        text: 'Income and Outcome evolution per Month (€)',
+        text: 'Evolución de ingresos y gastos mensuales (€)',
         color: '#3b82f6',
         font: { size: 16, weight: 'bold', family: 'Sora' },
       },

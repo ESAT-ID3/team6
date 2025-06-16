@@ -19,17 +19,23 @@ const MonthlyStatusPreview: React.FC<MonthlyStatusPreviewProps> = ({
 
   return (
     <div className="monthly-status-preview">
-      <h2>Monthly budget status</h2>
-
-      <div className="gauges-wrapper">
-        {data.map((item) => (
-          <GaugeChart
-            key={item.category}
-            label={item.category}
-            value={item.percent}
-          />
-        ))}
-      </div>
+      {data.length ? (
+        <>
+          <h2>Monthly budget status</h2>
+          <div className="gauges-wrapper">
+            {data.map((item) => (
+              <GaugeChart
+                key={item.category}
+                label={item.category}
+                value={item.percent}
+              />
+            ))}
+          </div>
+        </>
+      ) : (
+        <h2>No hay presupuesto creado en el mes actual</h2>
+      )}
+      
 
       <div className="button-container">
         <Button

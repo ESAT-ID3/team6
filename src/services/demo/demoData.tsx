@@ -53,133 +53,134 @@ let transactions_a: Transaction[] = [];
 let previousBudgets: Record<string, MonthlyBudget> = {};
 
 const spend_category: string[] = [
-    "Retail Stores",
-    "Grocery Stores & Supermarkets",
-    "Restaurants & Cafés",
-    "Entertainment & Leisure",
-    "Health & Wellness",
-    "Transportation",
-    "Education & Learning",
-    "Housing & Utilities",
-    "Travel & Tourism",
-    "Financial Services",
-    "Tech & Subscriptions",
-    "Hobbies & Recreation",
-    "Donations & Charity",
+    "Tiendas minoristas",
+    "Supermercados y tiendas de comestibles",
+    "Restaurantes y cafés",
+    "Entretenimiento y ocio",
+    "Salud y bienestar",
+    "Transporte",
+    "Educación y formación",
+    "Vivienda y servicios",
+    "Viajes y turismo",
+    "Servicios financieros",
+    "Tecnología y suscripciones",
+    "Aficiones y recreación",
+    "Donaciones y caridad",
     "Bizum"
 ];
 
 const sc_business_name: Record<string, string[]> = {
-    "Retail Stores": [
-    "El Corte Inglés", "Carrefour", "Alcampo", "Decathlon", "MediaMarkt", "Bershka", 
-    "Pull & Bear", "Stradivarius", "Zara", "Mango", "Desigual", "Springfield", "Cortefiel", 
-    "Massimo Dutti", "Lefties", "Primark España", "Fnac", "Tiger", "Parfois", "Misako"
-  ],
-  "Grocery Stores & Supermarkets": [
-    "Mercadona", "Día", "Carrefour Market", "Alcampo", "Eroski", "Lidl", "Aldi", "Supercor", 
-    "Consum", "Hipercor", "BM Supermercados", "Ahorramas", "Coviran", "Froiz", "Gadis", 
-    "Bonpreu", "Spar España", "HiperDino", "La Sirena", "El Árbol"
-  ],
-  "Restaurants & Cafés": [
-    "Vips", "100 Montaditos", "Telepizza", "Ginos", "Rodilla", "Pans & Company", "Foster’s Hollywood", 
-    "El Brillante", "La Sureña", "Cañas y Tapas", "Goiko", "Hamburguesa Nostra", "Lateral", 
-    "TGB - The Good Burger", "La Tagliatella", "UDON", "Casa Dani", "Casa Lucio", "Restaurante Botín", "Dunkin'"
-  ],
-  "Entertainment & Leisure": [
-    "Cinesa", "Yelmo Cines", "Kinépolis", "Ocine", "Autocine Madrid RACE", "PortAventura", "Parque Warner", 
-    "Siam Park", "Terra Mítica", "Zoo de Madrid", "Loro Parque", "Aquópolis", "Museo del Prado", 
-    "Museo Reina Sofía", "Teatro Español", "Gran Teatro del Liceu", "Sala Apolo", "Razzmatazz", 
-    "Shôko Madrid", "WiZink Center"
-  ],
-  "Health & Wellness": [
-    "Farmacias 24h", "Farmacias Ecoceutics", "Farmacias Alphega", "Vitaldent", "Sanitas", "Quirónsalud", 
-    "Dorsia Clínicas", "Clínicas Baviera", "Oftalvist", "McFIT", "Basic-Fit", "O2 Centro Wellness", 
-    "Metropolitan", "Anytime Fitness", "EVOfit", "Vivagym", "Altafit", "Asssa Seguros", "Adeslas", "DKV"
-  ],
-  "Transportation": [
-    "Cabify", "Uber", "BlaBlaCar", "Renfe", "Metro de Madrid", "TMB Barcelona", "Euskotren", 
-    "Ouigo", "Iryo", "Avanza", "ALSA", "Socibus", "Repsol", "Cepsa", "Galp", "BP", "Petronor", 
-    "Shell España", "Goldcar", "Europcar"
-  ],
-  "Education & Learning": [
-    "Domestika", "Aprendum", "Tutellus", "UNED", "Google Activate", "CEAC", "EF Education First", 
-    "Instituto Cervantes", "Universidad Complutense de Madrid", "Universidad de Barcelona", 
-    "Universidad Autónoma de Madrid", "Universidad Politécnica de Valencia", "Udemy", "Coursera", 
-    "LinkedIn Learning", "Formación Profesional CCC", "MasterD", "Campus Training", "EAE Business School", "Esade"
-  ],
-  "Housing & Utilities": [
-    "IKEA", "Conforama", "Leroy Merlin", "Bauhaus", "Brico Depôt", "Zara Home", "H&M Home", "Maisons du Monde", 
-    "Casa Viva", "Vitra", "Endesa", "Iberdrola", "Naturgy", "Repsol Luz", "Acciona Energía", "Movistar", 
-    "Orange", "Vodafone", "Yoigo", "Pepephone"
-  ],
-  "Travel & Tourism": [
-    "Iberia", "Air Europa", "Vueling", "Ryanair", "NH Hoteles", "Meliá", "Barceló", "Riu Hotels", 
-    "Paradores", "Booking.com", "Trivago", "Edreams", "Viajes El Corte Inglés", "Atrápalo", 
-    "Renfe Viajeros", "MSC Cruceros", "Pullmantur", "Binter Canarias", "Volotea", "Iryo"
-  ],
-  "Financial Services": [
-    "BBVA", "Santander", "CaixaBank", "Banco Sabadell", "Bankinter", "EVO Banco", "ING España", "Abanca", 
-    "Kutxabank", "Ibercaja", "Unicaja Banco", "Openbank", "Bizum", "PayPal", "Revolut", "N26", "Wise", 
-    "Bnext", "Banco Mediolanum", "Cajasur"
-  ],
-  "Tech & Subscriptions": [
-    "Netflix", "HBO Max", "Disney+", "Prime Video", "Filmin", "Movistar Plus+", "Spotify", "Apple Music", 
-    "Tidal", "YouTube Premium", "Dropbox", "Google One", "Microsoft 365", "Adobe Creative Cloud", 
-    "Canva Pro", "Notion", "GitHub", "Twitch", "Crunchyroll", "DAZN"
-  ],
-  "Hobbies & Recreation": [
-    "Decathlon", "Forum Sport", "Base Deportes", "Adidas", "Nike", "Joma", "New Balance", "Salomon", 
-    "The North Face", "El Ganso", "Hobby Consolas", "Juguettos", "LEGO Store", "Game", "Fnac", 
-    "MediaMarkt", "Casa del Libro", "El Dragón Lector", "Atlántica Juegos", "Magic Madrid"
-  ],
-  "Donations & Charity": [
-    "Cruz Roja Española", "Médicos Sin Fronteras", "Unicef España", "Save the Children", 
-    "Caritas", "World Wildlife Fund", "Fundación Vicente Ferrer", "Banco de Alimentos", 
-    "ACNUR", "Greenpeace España", "Aldeas Infantiles SOS", "Manos Unidas", "Fundación ONCE", 
-    "Plan International España", "Amnistía Internacional", "Médicos del Mundo", 
-    "Fundación Josep Carreras", "Asociación Española Contra el Cáncer", "Open Arms", "Educo"
-  ],
-  "Bizum": [
-    "Alejandro", "Sofía", "Mateo", "Valentina", "Lucas", 
-    "Isabella", "Diego", "Camila", "Javier", "Martina", 
-    "Carlos", "Elena", "Fernando", "Lucía", "Gabriel", 
-    "Mariana", "Ricardo", "Paula", "Sebastián", "Daniela"
-  ]
+    "Tiendas minoristas": [
+        "El Corte Inglés", "Carrefour", "Alcampo", "Decathlon", "MediaMarkt", "Bershka", 
+        "Pull & Bear", "Stradivarius", "Zara", "Mango", "Desigual", "Springfield", "Cortefiel", 
+        "Massimo Dutti", "Lefties", "Primark España", "Fnac", "Tiger", "Parfois", "Misako"
+    ],
+    "Supermercados y tiendas de comestibles": [
+        "Mercadona", "Día", "Carrefour Market", "Alcampo", "Eroski", "Lidl", "Aldi", "Supercor", 
+        "Consum", "Hipercor", "BM Supermercados", "Ahorramas", "Coviran", "Froiz", "Gadis", 
+        "Bonpreu", "Spar España", "HiperDino", "La Sirena", "El Árbol"
+    ],
+    "Restaurantes y cafés": [
+        "Vips", "100 Montaditos", "Telepizza", "Ginos", "Rodilla", "Pans & Company", "Foster’s Hollywood", 
+        "El Brillante", "La Sureña", "Cañas y Tapas", "Goiko", "Hamburguesa Nostra", "Lateral", 
+        "TGB - The Good Burger", "La Tagliatella", "UDON", "Casa Dani", "Casa Lucio", "Restaurante Botín", "Dunkin'"
+    ],
+    "Entretenimiento y ocio": [
+        "Cinesa", "Yelmo Cines", "Kinépolis", "Ocine", "Autocine Madrid RACE", "PortAventura", "Parque Warner", 
+        "Siam Park", "Terra Mítica", "Zoo de Madrid", "Loro Parque", "Aquópolis", "Museo del Prado", 
+        "Museo Reina Sofía", "Teatro Español", "Gran Teatro del Liceu", "Sala Apolo", "Razzmatazz", 
+        "Shôko Madrid", "WiZink Center"
+    ],
+    "Salud y bienestar": [
+        "Farmacias 24h", "Farmacias Ecoceutics", "Farmacias Alphega", "Vitaldent", "Sanitas", "Quirónsalud", 
+        "Dorsia Clínicas", "Clínicas Baviera", "Oftalvist", "McFIT", "Basic-Fit", "O2 Centro Wellness", 
+        "Metropolitan", "Anytime Fitness", "EVOfit", "Vivagym", "Altafit", "Asssa Seguros", "Adeslas", "DKV"
+    ],
+    "Transporte": [
+        "Cabify", "Uber", "BlaBlaCar", "Renfe", "Metro de Madrid", "TMB Barcelona", "Euskotren", 
+        "Ouigo", "Iryo", "Avanza", "ALSA", "Socibus", "Repsol", "Cepsa", "Galp", "BP", "Petronor", 
+        "Shell España", "Goldcar", "Europcar"
+    ],
+    "Educación y formación": [
+        "Domestika", "Aprendum", "Tutellus", "UNED", "Google Activate", "CEAC", "EF Education First", 
+        "Instituto Cervantes", "Universidad Complutense de Madrid", "Universidad de Barcelona", 
+        "Universidad Autónoma de Madrid", "Universidad Politécnica de Valencia", "Udemy", "Coursera", 
+        "LinkedIn Learning", "Formación Profesional CCC", "MasterD", "Campus Training", "EAE Business School", "Esade"
+    ],
+    "Vivienda y servicios": [
+        "IKEA", "Conforama", "Leroy Merlin", "Bauhaus", "Brico Depôt", "Zara Home", "H&M Home", "Maisons du Monde", 
+        "Casa Viva", "Vitra", "Endesa", "Iberdrola", "Naturgy", "Repsol Luz", "Acciona Energía", "Movistar", 
+        "Orange", "Vodafone", "Yoigo", "Pepephone"
+    ],
+    "Viajes y turismo": [
+        "Iberia", "Air Europa", "Vueling", "Ryanair", "NH Hoteles", "Meliá", "Barceló", "Riu Hotels", 
+        "Paradores", "Booking.com", "Trivago", "Edreams", "Viajes El Corte Inglés", "Atrápalo", 
+        "Renfe Viajeros", "MSC Cruceros", "Pullmantur", "Binter Canarias", "Volotea", "Iryo"
+    ],
+    "Servicios financieros": [
+        "BBVA", "Santander", "CaixaBank", "Banco Sabadell", "Bankinter", "EVO Banco", "ING España", "Abanca", 
+        "Kutxabank", "Ibercaja", "Unicaja Banco", "Openbank", "Bizum", "PayPal", "Revolut", "N26", "Wise", 
+        "Bnext", "Banco Mediolanum", "Cajasur"
+    ],
+    "Tecnología y suscripciones": [
+        "Netflix", "HBO Max", "Disney+", "Prime Video", "Filmin", "Movistar Plus+", "Spotify", "Apple Music", 
+        "Tidal", "YouTube Premium", "Dropbox", "Google One", "Microsoft 365", "Adobe Creative Cloud", 
+        "Canva Pro", "Notion", "GitHub", "Twitch", "Crunchyroll", "DAZN"
+    ],
+    "Aficiones y recreación": [
+        "Decathlon", "Forum Sport", "Base Deportes", "Adidas", "Nike", "Joma", "New Balance", "Salomon", 
+        "The North Face", "El Ganso", "Hobby Consolas", "Juguettos", "LEGO Store", "Game", "Fnac", 
+        "MediaMarkt", "Casa del Libro", "El Dragón Lector", "Atlántica Juegos", "Magic Madrid"
+    ],
+    "Donaciones y caridad": [
+        "Cruz Roja Española", "Médicos Sin Fronteras", "Unicef España", "Save the Children", 
+        "Caritas", "World Wildlife Fund", "Fundación Vicente Ferrer", "Banco de Alimentos", 
+        "ACNUR", "Greenpeace España", "Aldeas Infantiles SOS", "Manos Unidas", "Fundación ONCE", 
+        "Plan International España", "Amnistía Internacional", "Médicos del Mundo", 
+        "Fundación Josep Carreras", "Asociación Española Contra el Cáncer", "Open Arms", "Educo"
+    ],
+    "Bizum": [
+        "Alejandro", "Sofía", "Mateo", "Valentina", "Lucas", 
+        "Isabella", "Diego", "Camila", "Javier", "Martina", 
+        "Carlos", "Elena", "Fernando", "Lucía", "Gabriel", 
+        "Mariana", "Ricardo", "Paula", "Sebastián", "Daniela"
+    ]
 };
 
 const sc_spend_range: Record<string, [number, number]> = {
-  "Retail Stores": [5, 70],
-  "Grocery Stores & Supermarkets": [10, 70],
-  "Restaurants & Cafés": [3, 60],
-  "Entertainment & Leisure": [5, 100],
-  "Health & Wellness": [10, 200],
-  "Transportation": [1, 20],
-  "Education & Learning": [15, 25],
-  "Housing & Utilities": [50, 120],
-  "Travel & Tourism": [20, 340],
-  "Financial Services": [1, 200],
-  "Tech & Subscriptions": [2, 20],
-  "Hobbies & Recreation": [5, 70],
-  "Donations & Charity": [1, 15],
-  "Bizum": [0.50, 50]
-}
+    "Tiendas minoristas": [5, 70],
+    "Supermercados y tiendas de comestibles": [10, 70],
+    "Restaurantes y cafés": [3, 60],
+    "Entretenimiento y ocio": [5, 100],
+    "Salud y bienestar": [10, 200],
+    "Transporte": [1, 20],
+    "Educación y formación": [15, 25],
+    "Vivienda y servicios": [50, 120],
+    "Viajes y turismo": [20, 340],
+    "Servicios financieros": [1, 200],
+    "Tecnología y suscripciones": [2, 20],
+    "Aficiones y recreación": [5, 70],
+    "Donaciones y caridad": [1, 15],
+    "Bizum": [0.50, 50]
+};
 
 const sc_icon: Record<string, string> = {
-  "Retail Stores": "fas fa-store",
-  "Grocery Stores & Supermarkets": "fas fa-shopping-basket",
-  "Restaurants & Cafés": "fas fa-utensils",
-  "Entertainment & Leisure": "fas fa-film",
-  "Health & Wellness": "fas fa-heartbeat",
-  "Transportation": "fas fa-bus",
-  "Education & Learning": "fas fa-graduation-cap",
-  "Housing & Utilities": "fas fa-home",
-  "Travel & Tourism": "fas fa-plane",
-  "Financial Services": "fas fa-university",
-  "Tech & Subscriptions": "fas fa-laptop",
-  "Hobbies & Recreation": "fas fa-gamepad",
-  "Donations & Charity": "fas fa-hands-helping",
-  "Bizum": "fas fa-hand-holding-usd"
+    "Tiendas minoristas": "fas fa-store",
+    "Supermercados y tiendas de comestibles": "fas fa-shopping-basket",
+    "Restaurantes y cafés": "fas fa-utensils",
+    "Entretenimiento y ocio": "fas fa-film",
+    "Salud y bienestar": "fas fa-heartbeat",
+    "Transporte": "fas fa-bus",
+    "Educación y formación": "fas fa-graduation-cap",
+    "Vivienda y servicios": "fas fa-home",
+    "Viajes y turismo": "fas fa-plane",
+    "Servicios financieros": "fas fa-university",
+    "Tecnología y suscripciones": "fas fa-laptop",
+    "Aficiones y recreación": "fas fa-gamepad",
+    "Donaciones y caridad": "fas fa-hands-helping",
+    "Bizum": "fas fa-hand-holding-usd"
 };
+
 
 function getRandomDate(month: number, year: number): Date {
   const daysInMonth = new Date(year, month, 0).getDate();
@@ -265,7 +266,7 @@ function generateIncomeCard(month: number, year: number): Transaction {
   const cardDate = getRandomDate(month, year);
   const card: Transaction = {
     id: auxTransactions.length + 1,
-    category: "Work",
+    category: "Trabajo",
     amount: 1800,
     business: "Nómina mensual",
     date: cardDate.toLocaleDateString(),
