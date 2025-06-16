@@ -1,4 +1,3 @@
-// Statistics.tsx
 import "./Statistics.css";
 import { useState, useEffect } from "react";
 import { useUser } from "../../context/UserContext";
@@ -6,8 +5,8 @@ import userService from "../../services/firebase/userService";
 import Header from "../../components/layout/header/Header";
 import Button from "../../components/ui/button/Button";
 import BarChart from "../../components/ui/charts/BarChart";
-import PieChart from "../../components/ui/charts/PieChart";
 import HorizontalBarChart from "../../components/ui/charts/HorizontalBarChart";
+import DynamicTable from "../../components/ui/tables/DynamicTable";
 import Footer from "../../components/layout/footer/Footer";
 
 const Statistics = () => {
@@ -27,6 +26,8 @@ const Statistics = () => {
 
   const [selectedMonth, setSelectedMonth] = useState<string>("");
 
+  const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 768);
+
   const getRandomColor = (): string => {
     const r = Math.floor(Math.random() * 156) + 100;
     const g = Math.floor(Math.random() * 156) + 100;
@@ -34,12 +35,12 @@ const Statistics = () => {
     return `rgba(${r}, ${g}, ${b}, 0.7)`;
   };
 
-  function getBarChartData(banks_info: any[]) {
+  function getBarChartData(banks_info: any[], monthsCount: number) {
     const { labels, incomeData, outcomeData } =
       userService.getInfoPerMonth(banks_info);
-    const recentLabels = labels.slice(0, 12).reverse();
-    const recentIncomeData = incomeData.slice(0, 12).reverse();
-    const recentOutcomeData = outcomeData.slice(0, 12).reverse();
+    const recentLabels = labels.slice(0, monthsCount).reverse();
+    const recentIncomeData = incomeData.slice(0, monthsCount).reverse();
+    const recentOutcomeData = outcomeData.slice(0, monthsCount).reverse();
     return {
       labels: recentLabels,
       incomeData: recentIncomeData,
@@ -56,6 +57,14 @@ const Statistics = () => {
   }
 
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
     const fetchData = async () => {
       if (!user) return;
 
@@ -64,12 +73,6 @@ const Statistics = () => {
 
       if (banks_info) {
         setBanksInfo(banks_info);
-        console.log("Banks Info:", banks_info);
-        const { labels, incomeData, outcomeData } = getBarChartData(banks_info);
-        setLabels(labels);
-        setIncomeData(incomeData);
-        setOutcomeData(outcomeData);
-
         const banks: string[] = ["Todos"];
         banks_info.forEach((bank: any) => banks.push(bank.bank_name));
         setBankFilter(banks);
@@ -79,14 +82,31 @@ const Statistics = () => {
     fetchData();
   }, [user]);
 
-  // Nuevo useEffect que actúa una vez labels y banksInfo están listos
   useEffect(() => {
-    if (labels.length > 0 && banksInfo.length > 0 && !selectedMonth) {
+    if (banksInfo.length === 0) return;
+
+    const monthsCount = isMobile ? 6 : 12;
+
+    let filteredBanks =
+      selectedBank === "Todos"
+        ? banksInfo
+        : banksInfo.filter((b) => b.bank_name === selectedBank);
+
+    const { labels, incomeData, outcomeData } = getBarChartData(
+      filteredBanks,
+      monthsCount
+    );
+
+    setLabels(labels);
+    setIncomeData(incomeData);
+    setOutcomeData(outcomeData);
+
+    if (labels.length > 0) {
       const latestMonth = labels[labels.length - 1];
       setSelectedMonth(latestMonth);
       handleMonthClick(latestMonth);
     }
-  }, [labels, banksInfo, selectedMonth]);
+  }, [banksInfo, isMobile, selectedBank]);
 
   const handleMonthClick = (month: string) => {
     setSelectedMonth(month);
@@ -116,26 +136,12 @@ const Statistics = () => {
 
   const handleBankFilter = (bank: string) => {
     setSelectedBank(bank);
-
-    let filteredBanks =
-      bank === "Todos"
-        ? banksInfo
-        : banksInfo.filter((b) => b.bank_name === bank);
-
-    const { labels, incomeData, outcomeData } = getBarChartData(filteredBanks);
-    const latestMonth = selectedMonth || labels[labels.length - 1];
-
-    setLabels(labels);
-    setIncomeData(incomeData);
-    setOutcomeData(outcomeData);
-
-    handleMonthClick(latestMonth);
   };
 
   return (
     <>
       <Header />
-      <main>
+      <main className="stats-main">
         <div>
           <h2>Estadísticas</h2>
         </div>
@@ -162,9 +168,10 @@ const Statistics = () => {
             onBarClick={handleMonthClick}
           />
         </div>
-        <div>
+        <div className="selected-month">
           <h4>
-            Showing data from: {selectedMonth || labels[labels.length - 1]}
+            Visualizando fecha:{" "}
+            {selectedMonth || (labels.length > 0 ? labels[labels.length - 1] : "")}
           </h4>
         </div>
         <div className="gauge-gallery-container"></div>
@@ -177,11 +184,17 @@ const Statistics = () => {
             />
           </div>
           <div className="chart-gallery__item">
-            <PieChart
-              labels={categories}
-              data={spendData}
-              colors={categoryColors}
-              hideLegend={true}
+            <DynamicTable
+              labels={["Categoría", "% del gasto"]}
+              data={categories.map((category, idx) => {
+                const totalSpend = spendData.reduce((acc, val) => acc + val, 0);
+                return {
+                  category,
+                  percentage: totalSpend
+                    ? ((spendData[idx] / totalSpend) * 100).toFixed(2) + "%"
+                    : "0%",
+                };
+              })}
             />
           </div>
         </div>
