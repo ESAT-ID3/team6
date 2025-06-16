@@ -1,13 +1,19 @@
 import "./Navbar.css";
 import menuIcon from "../../../assets/icons/menu.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AccordionItem from "../../ui/button/Accordion";
 import { useState } from "react";
 import { useUser } from "../../../context/UserContext";
 
 function Navbar() {
   const [isOffcanvasOpen, setIsOffcanvasOpen] = useState(false);
-  const { user } = useUser();
+  const { user, logOut } = useUser();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logOut();
+    navigate("/login");
+  };
 
   const isLoggedIn = user !== null;
   const role = user?.role;
@@ -73,6 +79,11 @@ function Navbar() {
               <Link to="/user" className="nav-link">
                 Mi Perfil
               </Link>
+            </div>
+            <div className="nav-item">
+              <button className="logout-button" onClick={handleLogout}>
+                Cerrar sesión
+              </button>
             </div>
           </>
         )}
@@ -140,6 +151,7 @@ function Navbar() {
               </>
             )}
           </div>
+
           <div className="offcanvas-footer">
             <Link to="/legalnotice" className="footer-link">
               Aviso legal
@@ -147,6 +159,9 @@ function Navbar() {
             <Link to="/privacypolicy" className="footer-link">
               Política de privacidad
             </Link>
+            <button className="logout-mobile" onClick={handleLogout}>
+              Cerrar sesión
+            </button>
           </div>
         </div>
       </nav>

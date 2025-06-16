@@ -69,6 +69,19 @@
   display: flex;
 }
 
+.logout-button {
+  background: none;
+  border: none;
+  color: var(--white);
+  font-family: var(--font-main);
+  font-size: var(--font-p);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 0;
+}
+
 @media (width < 920px) {
   .nav-highres {
     display: none;
@@ -149,5 +162,18 @@
     font-size: var(--font-p);
     text-decoration: underline;
     color: var(--white);
+  }
+
+  .logout-mobile {
+    background: none;
+    border: none;
+    font-family: var(--font-main);
+    font-size: var(--font-p);
+    color: var(--white);
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+    text-align: left;
+    white-space: nowrap;
   }
 }

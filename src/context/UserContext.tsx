@@ -1,5 +1,5 @@
 // src/context/UserContext.tsx
-import { createContext, useState, useContext, ReactNode } from 'react';
+import { createContext, useState, useContext, ReactNode } from "react";
 
 interface User {
   id: string;
@@ -13,15 +13,19 @@ interface User {
 interface UserContextType {
   user: User | null;
   setUser: (user: User | null) => void;
+  logOut: () => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
+  const logOut = () => {
+    setUser(null);
+  };
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, logOut }}>
       {children}
     </UserContext.Provider>
   );
