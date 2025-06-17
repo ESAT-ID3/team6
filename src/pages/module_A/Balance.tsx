@@ -58,7 +58,7 @@ const Balance = () => {
         <div className="balance-grid">
           <div className="balance-left">
             <div className="total-balance-card">
-              <p>Total Balance:</p>
+              <p>Saldo total:</p>
               <h1>{totalBalance.toFixed(2)}€</h1>
             </div>
             <div className="transactions-section">

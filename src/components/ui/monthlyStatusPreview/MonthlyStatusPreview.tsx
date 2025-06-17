@@ -21,7 +21,7 @@ const MonthlyStatusPreview: React.FC<MonthlyStatusPreviewProps> = ({
     <div className="monthly-status-preview">
       {data.length ? (
         <>
-          <h2>Monthly budget status</h2>
+          <h2>Estado de los presupuestos actuales</h2>
           <div className="gauges-wrapper">
             {data.map((item) => (
               <GaugeChart

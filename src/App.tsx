@@ -31,8 +31,8 @@ function App() {
       <Route path="/finance/market" element={<MarketStats />} />
       <Route path="/finance/news" element={<FinanceNews />} />
       <Route path="/finance/wiki" element={<WikiFinance />} />
-      <Route path="/legalnotice" element={<LegalNotice />} />
-      <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+      <Route path="/legal-notice" element={<LegalNotice />} />
+      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
     </Routes>
   );
 }

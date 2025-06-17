@@ -12,7 +12,7 @@ function Navbar() {
 
   const handleLogout = () => {
     logOut();
-    navigate("/login");
+    navigate("/");
   };
 
   const isLoggedIn = user !== null;
