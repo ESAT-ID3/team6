@@ -1,56 +1,45 @@
-.stats-main {
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 12px;
+.st-main {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
 }
 
 .filter-gallery {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 12px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
 }
 
 .bar-chart-container {
-  width: calc(100vw - 50px);
-  height: 500px;
+    width: calc(100vw - 50px);
+    height: 500px;
 }
 
-/* NUEVO BLOQUE */
 .selected-month {
-  text-align: center;
-  margin-top: 16px;
-  margin-bottom: 32px; /* más espacio hacia abajo */
+  display: flex;
+  justify-content: center;
 }
+
 
 .chart-gallery {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
-  align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
 }
 
 .chart-gallery__item {
-  min-width: 300px;
-  flex: 1 1 45%;
-  max-width: 600px;
+  display: flex;
+  justify-content: center;
+  min-width: calc(50% - 50px);
   height: 500px;
 }
 
-@media (max-width: 768px) {
-  .chart-gallery {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .chart-gallery__item {
-    flex: none;
-    width: 90%;
-    max-width: none;
-    height: auto;
-  }
+.chart-gallery__item--table {
+  height: auto;
 }

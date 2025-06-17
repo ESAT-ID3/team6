@@ -42,7 +42,7 @@ const Login = () => {
             if (data.role === 'admin' || data.role === 'dev') {
                 navigate("/dev");
             } else {
-                navigate('/user')
+                navigate('/personal/balance')
             }
         } else {
             setDataError(true);

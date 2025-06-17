@@ -139,7 +139,7 @@ const Statistics = () => {
   };
 
   return (
-    <>
+    <div className="stats-container">
       <Header />
       <main className="stats-main">
         <div>
@@ -183,7 +183,7 @@ const Statistics = () => {
               colors={categoryColors}
             />
           </div>
-          <div className="chart-gallery__item">
+          <div className="chart-gallery__item chart-gallery__item--table">
             <DynamicTable
               labels={["Categoría", "% del gasto"]}
               data={categories.map((category, idx) => {
@@ -200,7 +200,7 @@ const Statistics = () => {
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 };
 
