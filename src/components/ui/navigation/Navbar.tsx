@@ -60,26 +60,26 @@ function Navbar() {
               <div className="nav-item dropdown">
                 <span className="nav-link">Inversión ▼</span>
                 <div className="dropdown-menu">
-                  <Link to="/finance/portfolio" className="dropdown-link">
+                  {/* <Link to="/finance/portfolio" className="dropdown-link">
                     Mi Cartera
-                  </Link>
+                  </Link> */}
                   <Link to="/finance/market" className="dropdown-link">
                     Mercado Financiero
                   </Link>
                   <Link to="/finance/news" className="dropdown-link">
                     Actualidad
                   </Link>
-                  <Link to="/finance/wiki" className="dropdown-link">
+                  {/* <Link to="/finance/wiki" className="dropdown-link">
                     Wiki-Finance
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             )}
-            <div className="nav-item">
+            {/* <div className="nav-item">
               <Link to="/user" className="nav-link">
                 Mi Perfil
               </Link>
-            </div>
+            </div> */}
             <div className="nav-item">
               <button className="logout-button" onClick={handleLogout}>
                 Cerrar sesión
@@ -107,9 +107,9 @@ function Navbar() {
             )}
             {isLoggedIn && (
               <>
-                <Link to="/user" className="nav-link">
+                {/* <Link to="/user" className="nav-link">
                   Mi Perfil
-                </Link>
+                </Link> */}
                 {canSeePersonal && (
                   <AccordionItem title="Finanzas personales">
                     <Link to="/personal/balance" className="nav-link">
@@ -131,9 +131,9 @@ function Navbar() {
                 )}
                 {canSeeInvest && (
                   <AccordionItem title="Inversión">
-                    <Link to="/finance/portfolio" className="nav-link">
+                    {/* <Link to="/finance/portfolio" className="nav-link">
                       Mi Cartera
-                    </Link>
+                    </Link> */}
                     <br />
                     <Link to="/finance/market" className="nav-link">
                       Mercado Financiero
@@ -143,9 +143,9 @@ function Navbar() {
                       Actualidad
                     </Link>
                     <br />
-                    <Link to="/finance/wiki" className="nav-link">
+                    {/* <Link to="/finance/wiki" className="nav-link">
                       Wiki-Finance
-                    </Link>
+                    </Link> */}
                   </AccordionItem>
                 )}
               </>

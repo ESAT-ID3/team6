@@ -111,7 +111,7 @@ const SignUp = () => {
           surname: p_surname,
           role: 'full-service',
         });
-        navigate('/user');
+        navigate('/personal/balance');
       });
     } else {
       console.log("Change the info to submit");
