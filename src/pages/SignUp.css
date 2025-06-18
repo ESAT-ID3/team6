@@ -22,6 +22,12 @@
   z-index: 0;
 }
 
+
+.login-error-message {
+    color: var(--main-error);
+    text-align: center;
+}
+
 .signup-card {
   position: relative;
   display: flex;

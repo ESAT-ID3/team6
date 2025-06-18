@@ -25,6 +25,8 @@ const SignUp = () => {
   const [cvv, setCvv] = useState('');
   const [dni, setDni] = useState('');
 
+  const [dataError, setDataError] = useState('')
+
   const isFormValid = fullName && email && password && phone && country && termsAccepted;
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -42,37 +44,50 @@ const SignUp = () => {
 
   const checkNameFormat = () => {
     const NAME_REGEXP = /^[A-Za-zÀ-ÖØ-öø-ÿ]+(?: [A-Za-zÀ-ÖØ-öø-ÿ]+)*$/;
-    return NAME_REGEXP.test(fullName.trim());
+    let result = NAME_REGEXP.test(fullName.trim())
+    if (!result) setDataError('El nombre debe contener solo letras y espacios, sin números ni caracteres especiales.')
+    return result;
   };
 
   const checkEmailFormat = () => {
     const EMAIL_REGEXP = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return EMAIL_REGEXP.test(email);
+    let result = EMAIL_REGEXP.test(email)
+    if (!result) setDataError('Introduce una dirección de correo electrónico válida.')
+    return result;
   };
 
   const checkPasswordFormat = () => {
     const REGEXP = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d])[a-zA-Z\d\W_]{6,}$/;
-    return REGEXP.test(password);
+    let result = REGEXP.test(password)
+    if (!result) setDataError('La contraseña debe tener al menos 6 caracteres, incluyendo una mayúscula, una minúscula, un número y un símbolo.')
+    return result;
   };
 
   const validatePartOne = () => {
-    return checkNameFormat() && checkEmailFormat() && checkPasswordFormat();
+    let result = checkNameFormat() && checkEmailFormat() && checkPasswordFormat();
+    if (result) setDataError('')
+    return result
   };
 
   const checkIdFormat = () => {
     const ID_REGEXP = /^(\d{8}[A-Z]|[XYZ]\d{7}[A-Z])$/;
-    return ID_REGEXP.test(dni);
+    let result = ID_REGEXP.test(dni)
+    if (!result) setDataError('Introduzca un documento de identificación válido')
+    return result;
   };
 
   const checkAccountNumberFormat = () => {
     const cleaned = bankAccountNumber.replace(/[\s-]/g, '');
     const CARD_NUMBER_REGEX = /^\d{13,19}$/;
-    return CARD_NUMBER_REGEX.test(cleaned);
+    let result = CARD_NUMBER_REGEX.test(cleaned);
+    if (!result) setDataError('Introduzca un número de tarjeta válido')
+    return result;
   };
 
   const checkExpirationDateFormat = () => {
     const EXP_DATE_REGEX = /^(0[1-9]|1[0-2])\/\d{2}$/;
     if (!EXP_DATE_REGEX.test(expirationDate)) {
+      setDataError('La fecha de caducidad debe estar en formato MM/YY')
       return false;
     }
     const [monthStr, yearStr] = expirationDate.split('/');
@@ -81,16 +96,22 @@ const SignUp = () => {
     const now = new Date();
     // JS months are zero-based, so subtract 1 from month for correct date comparison
     const expDate = new Date(year, month - 1, 1);
-    return expDate > now;
+    let result = expDate > now;
+    if (!result) setDataError('La fecha de caducidad debe ser posterior')
+    return result
   };
 
   const checkCvvFormat = () => {
     const CVV_REGEX = /^\d{3,4}$/;
-    return CVV_REGEX.test(cvv);
+    let result = CVV_REGEX.test(cvv)
+    if (!result) setDataError('Introduzca un CVV válido')
+    return result;
   };
 
   const validatePartTwo = () => {
-    return checkIdFormat() && checkAccountNumberFormat() && checkCvvFormat() && checkExpirationDateFormat();
+    let result = checkIdFormat() && checkAccountNumberFormat() && checkCvvFormat() && checkExpirationDateFormat();
+    if (result) setDataError('')
+    return result
   };
 
   const submitData = (event: React.FormEvent<HTMLFormElement>) => {
@@ -185,6 +206,11 @@ const SignUp = () => {
                 Aceptar política de privacidad y términos de uso*
               </label>
             </div>
+            {dataError && (
+                <div className="login-error-message">
+                    <small>{dataError}</small>
+                </div>
+            )}
             <Button
               variant="secondary"
               label="Continue"
@@ -270,7 +296,11 @@ const SignUp = () => {
               value={dni}
               onChange={(e) => setDni(e.target.value)}
             />
-
+            {dataError && (
+                <div className="login-error-message">
+                    <small>{dataError}</small>
+                </div>
+            )}
             <div className="submit-buttons">
               <Button
                 variant="secondary"
